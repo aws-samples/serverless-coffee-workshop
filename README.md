@@ -1,17 +1,22 @@
-## My Project
+# Welcome to the Serverlesspresso workshop!
 
-TODO: Fill this README out!
+Serverlesspresso is a serverless coffee bar exhibit, as seen at AWS re:Invent 2021. This consists of three frontend applications and various backend microservices. This README explains the  process to completely install all the various components.
 
-Be sure to:
+For workshop instructions, visit the workshop's new instructions site.
 
-* Change the title in this README
-* Edit your repository description on GitHub
+Have an idea for this workshop? Found a bug?
+If you have an idea for a module or feature in this workshop, or you have found a bug or need to report a problem, let us know!
 
-## Security
+- Request a feature
+- Report an issue
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+Contact the Serverless DA team for any additional help or support requests.
 
-## License
+Important: this application uses various AWS services and there are costs associated with these services after the Free Tier usage - please see the [AWS Pricing page](https://aws.amazon.com/pricing/) for details. You are responsible for any AWS costs incurred. No warranty is implied in this example.
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
 
+==============================================
+
+Copyright 2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+SPDX-License-Identifier: MIT-0

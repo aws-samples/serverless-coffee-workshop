@@ -1,0 +1,121 @@
+[
+   {
+  "PK": {
+    "S": "menu"
+  },
+  "value": {
+    "L": [
+      {
+        "M": {
+          "available": {
+            "BOOL": true
+          },
+          "icon": {
+            "S": "barista-icons_espresso-alternative"
+          },
+          "modifiers": {
+            "L": []
+          },
+          "drink": {
+            "S": "Espresso"
+          }
+        }
+      },
+      {
+        "M": {
+          "available": {
+            "BOOL": true
+          },
+          "icon": {
+            "S": "barista-icons_cappuccino-alternative"
+          },
+          "modifiers": {
+            "L": []
+          },
+          "drink": {
+            "S": "Cappuccino"
+          }
+        }
+      },
+      {
+        "M": {
+          "available": {
+            "BOOL": true
+          },
+          "icon": {
+            "S": "barista-icons_cafe-latte"
+          },
+          "modifiers": {
+            "L": []
+          },
+          "drink": {
+            "S": "Latte"
+          }
+        }
+      },
+      {
+        "M": {
+          "available": {
+            "BOOL": true
+          },
+          "icon": {
+            "S": "barista-icons_flat-white-alternative@2x"
+          },
+          "modifiers": {
+            "L": []
+          },
+          "drink": {
+            "S": "Flat White"
+          }
+        }
+      },
+      {
+        "M": {
+          "available": {
+            "BOOL": true
+          },
+          "icon": {
+            "S": "barista-icons_americano"
+          },
+          "modifiers": {
+            "L": []
+          },
+          "drink": {
+            "S": "Americano"
+          }
+        }
+      },
+      {
+        "M": {
+          "available": {
+            "BOOL": true
+          },
+          "icon": {
+            "S": "barista-icons_americano"
+          },
+          "modifiers": {
+            "L": []
+          },
+          "drink": {
+            "S": "Coffee of the day"
+          }
+        }
+      }
+    ]
+  }
+},
+    {
+      "PK": {
+        "S": "config"
+      },
+      "storeOpen": {
+        "BOOL": true
+      },
+      "maxOrdersPerUser": {
+        "N": "1"
+      },
+      "maxOrdersInQueue": {
+        "N": "10"
+      }
+    }
+]
