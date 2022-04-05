@@ -71,7 +71,6 @@
       "Next": "Emit Completed || Cancelled",
       "ResultPath": "$.detail",
       "Parameters": {
-        "baristaUserId.$": "$.result.Attributes.baristaUserId.S",
         "orderId.$": "$.orderId",
         "userId.$": "$.result.Attributes.USERID.S",
         "ORDERSTATE.$": "$.result.Attributes.ORDERSTATE.S",
