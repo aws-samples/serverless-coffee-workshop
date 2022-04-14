@@ -70,7 +70,10 @@ In this section, you add an EventBridge PutEvents state that emits an event when
 
 8. On the *Error handling tab*, for *Heartbeat*, enter `900` seconds. This means that the workflow will time out if the callback is not received within 15 minutes.
 
+![Configure heartbeat](../images/se-mod1-wait4b.png)
+
 9. With the *Flow* tab selected on the left, drag the Pass state action from the list to the empty *Drop state here* placeholder in the designer.
+
 
 ![Drag UpdateItem to designer](../images/se-mod1-wait5b.png)
 

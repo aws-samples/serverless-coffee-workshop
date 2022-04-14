@@ -3,20 +3,6 @@ title = "Deploying the backend"
 weight = 15
 +++
 
-The Serverlesspresso application consists of frontends and a backend. The backend is a set of serverless microservices.
-
-Some parts of the backend application have been developed already. In this section, you will clone a repo containing these pre-built parts and deploy it into your environment. You will deploy:
-
-* A Cognito configuration so users can log in from the frontends and be authenticated by the backend.
-* An Order Management service, which will keep track of the coffee orders.
-* A Publisher service, which sends events back to the frontend applications using AWS IoT Core.
-
-After you have deployed these back-end resources, you will then build the Step Functions workflow and set up the events that make the application work.
-
-Each of the following sections provides an implementation overview and detailed, step-by-step instructions.
-
-## Backend-architecture
-
 [![See Serverlesspresso](/images/se-setup-overview4.png)](https://youtu.be/M6lPZCRCsyA)
 The backend is a set of serverless microservices. In this section, you will deploy the following:
 

@@ -138,11 +138,13 @@ In this section, you will see what happens when a timeout occurs, using the exec
 
 ### Step-by-step instructions ##
 
+After 15 minutes have elapsed since you started the execution list, the executions that were running will terminate with a *Failed* state.  Complete the following steps to observe this, or move ahead to the [module review section](/1b-workflow/9-review.html).
+
 1. Go to the Step Functions console. From the AWS Management Console, select *Services* then select Step Functions under *Application Integration*. **Make sure your region is correct**.
 
 2. From the left-hand menu, select *State machine* and choose **OrderProcessorWorkflow** from the list.
 
-3. Wait until 15 minutes have elapsed since you started the execution list. You will see that the executions that were running are now in a *Failed* state.
+3. After 15 minutes have elapsed since you started the execution list. You will see that the executions that were running are now in a *Failed* state.
 
 ![Timed out executions](../images/se-mod1-testing5.png)
 
