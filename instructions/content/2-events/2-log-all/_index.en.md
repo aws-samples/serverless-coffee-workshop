@@ -8,7 +8,7 @@ weight = 12
 * You will test the new rule and see the input payloads.
 * You will configure the new rule to log all events to [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/).
 
-Each serverlesspresso event is emitted to a custom event bus named *"Serverlesspresso"*.
+Each Serverlesspresso event is emitted to a custom event bus named *"Serverlesspresso"*.
 
 An event is a change in state, or an update, like an order being placed on the customer website. Events can either carry the state (the item ordered, its modifiers, and user id) or events can be identifiers (a notification that an order was completed).
 

@@ -156,7 +156,7 @@ After 15 minutes have elapsed since you started the execution list, the executio
 
 * You tested how the workflow responds, depending on if the store is open or closed.
 * You tested the store capacity feature by exceeding the allowed number of executions.
-* You verified that incomplete executions timeout after 5 minutes.
+* You verified that incomplete executions timeout after 15 minutes.
 
 Congratulations, you've now configured the workflow for the application!
 

@@ -5,7 +5,7 @@ weight = 14
 
 ## Overview
 
-The Order Processor workflow built in module emits the `WorkflowStarted` event. At this point in the order, the workflow has checked that the shop is open and that the barista has capacity for the new order. The workflow now waits for up to 5 minutes for the customer to choose and submit their coffee order. This is the first time in the process that the order waits for human interaction.
+The Order Processor workflow built in module emits the `WorkflowStarted` event. At this point in the order, the workflow has checked that the shop is open and that the barista has capacity for the new order. The workflow now waits for up to 15 minutes for the customer to choose and submit their coffee order. This is the first time in the process that the order waits for human interaction.
 
 Step Functions does this by implementing the *Wait for callback Task Token* pattern. It passes the task token to the integrated service ([Amazon EventBridge](https://aws.amazon.com/eventbridge)). The task pauses until the workflow receives that task token back with a `SendTaskSuccess` or `SendTaskFailure` call.
 
