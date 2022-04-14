@@ -9,7 +9,7 @@ In the coffee ordering application, each customer order follows a series of step
 
 * The initial QR code scan starts the ordering process.
 * The application checks that the shop is open and the barista's queue is not full. In this workshop, the barista can only handle up to 20 drinks at a time. If the shop is closed or the queue is full, the order process stops.
-* It waits 5 minutes for the customer to place the specifics of the drink order, such as a "Vanilla Latte with Soy Milk". If nothing happens after 5 minutes, the order times out.
+* It waits 15 minutes for the customer to place the specifics of the drink order, such as a "Vanilla Latte with Soy Milk". If nothing happens after 15 minutes, the order times out.
 * It waits 15 minutes for the barista to produce the drink. If nothing happens after 15 minutes, the order times out.
 * The order is finally completed or canceled by the barista.
 

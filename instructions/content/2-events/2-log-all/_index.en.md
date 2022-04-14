@@ -64,7 +64,7 @@ In this section, you will test that the rule logs all Serverlesspresso events to
 
 ### Step-by-step instructions ###
 
-1. From the [AWS Step Functions console] (https://console.aws.amazon.com/states/), select the *OrderProcessorWorkflow* you created earlier.
+1. From the [AWS Step Functions console](https://console.aws.amazon.com/states/), select the *OrderProcessorWorkflow* you created earlier.
 
 2. From the section at top of the page showing the workflow, choose **Start execution**.
 
