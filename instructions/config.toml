@@ -16,7 +16,7 @@ pygmentsStyle = "monokai"
 [params]
   description = "Serverlesspresso workshop"
   author = "Ben Smith (https://twitter.com/benjamin_l_s) & James Beswick (https://twitter.com/jbesw)"
-  hashCode = "59c4-1d5486e414-d3"
+  hashCode = ""
   disableBreadcrumb = false
   disableNextPrev = false
   themeVariant = "aws"
