@@ -10,6 +10,8 @@ If you have an idea for a module or feature in this workshop, or you have found 
 - [Request a feature](https://github.com/aws-samples/serverless-coffee-workshop/issues/new)
 - [Report an issue](https://github.com/aws-samples/serverless-coffee-workshop/issues/new)
 
+**To see the instructions for the workshop, visit: https://workshop.serverlesscoffee.com/.**
+
 Contact the AWS Serverless DA team for any additional help or support requests.
 
 Important: this application uses various AWS services and there are costs associated with these services after the Free Tier usage - please see the [AWS Pricing page](https://aws.amazon.com/pricing/) for details. You are responsible for any AWS costs incurred. No warranty is implied in this example.
