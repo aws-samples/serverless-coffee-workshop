@@ -20,7 +20,7 @@ Events are JSON messages containing a message wrapped in an envelope:
 ![Example event](../images/se-mod3-events-overview1.png)
 
 - The envelope, shown in the red box above, contains attributes provided by EventBridge. These identify the source AWS account, timestamp, source Region, and AWS resources.
-- The `source` attribute is provided by the application creating the event. This workshop uses the source `awsserverlessda.serverlesspresso` to uniquely identify all events related to this workload. To can set this to almost any value (AWS events use a prefix of "AWS", which is reserved).
+- The `source` attribute is provided by the application creating the event. This workshop uses the source `awsserverlessda.serverlesspresso` to uniquely identify all events related to this workload. You can set this to almost any value (AWS events use a prefix of "AWS", which is reserved).
 - The `detail-type` attribute is also set by the application creating the event. This provides information about the type of event. In this example, `OrderProcessor.WorkflowStarted` indicates the source of *OrderProcessor* and an action of *WorkflowStarted*.
 - The `detail` attribute is a JSON payload containing custom event information. For custom events you create, this can be any arbitrary JSON.
 

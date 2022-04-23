@@ -4,7 +4,7 @@ weight = 16
 +++
 ## Overview
 
-The `WaitingCompletion` event is emitted by the `OrderProcessor` workflow built in module 1. At this point in the order, the user has submitted their drink request, the `OrderProcessor` workflow has generated an order number, and is now paused until the barista completes the order. The workflow has emitted a `WaitingCompletion` event, along with a new `TaskTaken` which is used to resume the workflow.
+The `WaitingCompletion` event is emitted by the `OrderProcessor` workflow built in module 1. At this point in the order, the user has submitted their drink request, the `OrderProcessor` workflow has generated an order number, and is now paused until the barista completes the order. The workflow has emitted a `WaitingCompletion` event, along with a new `TaskToken` which is used to resume the workflow.
 
 You will now create a new rule to route this event to a Lambda function that will update the `serverlesspresso-order-table` with the new `TaskToken`, order number, and order state.
 
