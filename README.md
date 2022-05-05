@@ -21,4 +21,4 @@ Important: this application uses various AWS services and there are costs associ
 
 Copyright 2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-SPDX-License-Identifier: MIT-0
+SPDX-License-Identifier: MIT-0.
