@@ -3,31 +3,25 @@ title = "AWS Cloud9 IDE"
 weight = 13
 +++
 
-[AWS Cloud9](https://aws.amazon.com/cloud9/) is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal. Cloud9 comes pre-packaged with essential tools for popular programming languages and the AWS Command Line Interface (CLI) pre-installed so you don’t need to install files or configure your laptop for this workshop.
+{{% notice info%}}
+After completed either of 2 previous sections ([AWS hosted](/0-setup/1-aws-hosted.html) or [self hosted](/0-setup/1-awselfs-hosted.html)) an [AWS Cloud9](https://aws.amazon.com/cloud9/) instance is been created for you.
+ {{% /notice %}}
+
+Cloud9 is a cloud-based integrated development environment (IDE) that lets you write, run, and debug your code with just a browser. It includes a code editor, debugger, and terminal. Cloud9 comes pre-packaged with essential tools for popular programming languages and the AWS Command Line Interface (CLI) pre-installed so you don’t need to install files or configure your laptop for this workshop.
 
 Your Cloud9 environment will have access to the same AWS resources as the user with which you logged into the AWS Management Console. We strongly recommend using Cloud9 to complete this workshop.
 
-Take a few minutes now and set up your Cloud9 development environment. Cloud9 works best with Chrome or Firefox, not Safari. It cannot be used from a tablet.
-
 ## Starting AWS Cloud9 ##
 
-### Step-by-step instructions ###
 
-1. Go to the AWS Management Console, Select **Services** then select [**Cloud9**](https://us-east-1.console.aws.amazon.com/cloud9/home) under Developer Tools. From the top-right of the Console, select an available region for this workshop. Once you have selected a region for Cloud9, use the same region for the entirety of this workshop.
+1. Go to the AWS Management Console, Select **Services** then select [**Cloud9**](https://us-east-1.console.aws.amazon.com/cloud9/home) under Developer Tools. From the top-right of the Console, select the  region for this workshop.  Use the same region for the entirety of this workshop.
 
-2. Select **Create environment**.
+7. From the Cloud9 Navigtion, select *Your environments*, then choose *Open IDE* from the newly created Cloud9 instace named *Serverlesspresso-development*.
 
-3. Enter `serverlesspresso-development` into **Name** and optionally provide a **Description**.
+![Cloud9](../images/se-mod0-cloud9-env.png)
 
-4. Select **Next step**.
 
-5. For *Instance type*, select a **t3.small**. You may leave the other **Environment settings** at their defaults for an EC2 instance based on Amazon Linux 2 which will be paused after **30 minutes** of inactivity. Select **Next step**.
-
-![Cloud9 instance](../images/setup4.png)
-
-6. Review the environment settings and select **Create environment**. It will take a few minutes for your Cloud9 environment to be provisioned and prepared.
-
-7. Once ready, your IDE will open to a welcome screen. Below that, you should see a terminal prompt. Close the *Welcome* tab and drag up the terminal window to give yourself more space to work in.
+7. This opens up at the Cloud9 IDE welcome screen. Below that, you should see a terminal prompt. Close the *Welcome* tab and drag up the terminal window to give yourself more space to work in.
 
 ![Cloud9](../images/setup5.png)
 

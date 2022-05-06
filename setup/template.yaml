@@ -824,8 +824,6 @@ Resources:
             TableName: !Ref ConfigTable
         - DynamoDBWritePolicy:
             TableName: !Ref OrderTable
-        - DynamoDBWritePolicy:
-            TableName: !Ref OrderTable
         - Statement:
           - Sid: SendTaskSuccess
             Effect: Allow

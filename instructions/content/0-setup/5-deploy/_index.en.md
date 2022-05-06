@@ -42,7 +42,7 @@ This allows you to specify your application requirements in code and SAM transfo
 
 ### Step-by-step instructions
 
-In this section, you will complete your first SAM deployment which will build much of the backend infrastructure which we will add to throughout the rest of the workshop.
+In this section, you will complete a SAM deployment which will build much of the backend infrastructure which we will add to throughout the rest of the workshop.
 
 1. Go back to your browser tab with Cloud9 running. If you need to re-launch Cloud9, from the AWS Management Console, select **Services** then select [**Cloud9**](https://console.aws.amazon.com/cloud9) under *Developer Tools*. **Make sure your region is correct.**
 
@@ -57,35 +57,18 @@ sam build
 
 4. Use the SAM CLI to deploy the infrastructure by running the following command:
 ```
-sam deploy --guided
+sam deploy --stack-name serverlesspresso-backend --resolve-s3 --capabilities CAPABILITY_IAM
 ```
 
-At the prompt, enter `serverlesspresso-backend` for *Stack Name*. You can accept the defaults for the other parameters.
-
-![SAM setup](../images/setup8.png)
-
-- For `Confirm changes before deploy [y/N]`, enter "N".
-- For `Allow SAM CLI IAM role creation [Y/n]`, enter "Y".
-- Accept the other defaults.
-
-This will take a few minutes to deploy. You can see the deployment progress in the console. Wait until you see the `Successfully created/updated stack - serverlesspresso-backend` confirmation message in the console before continuing.
-
-While you wait, here's what the custom parameters do:
-
-- **AppName**: Used by all the resources to prefix variables and provide common naming, to make it easier to identify everything used by the application.
-- **Service**: The name of this service stack.
-- **LogRetentionInDays**: Defines how many days CloudWatch should keep log files. By default, this has no limit. The default used in this stack is 14 days.
-- **Source**: The source name used by events in this application. This helps us filter only for events produced by microservices in this workload.
-
-The *TimeInterval*, *CodeLength*, and *TokensPerBucket* values define how the barcode functionality works in the Display App in the frontend. With the default values here, the barcode represents a 10-character unique code that provides 10 drinks every 5 minutes. We'll cover this in more detail in the frontends section.
-
-4. Once the deployment is complete, you'll see a list of output in the terminal under `CloudFormation outputs from deployed stack`.
+5. Once the deployment is complete, you'll see a list of output in the terminal under `CloudFormation outputs from deployed stack`.
 
 ![SAM setup](../images/setup9.png)
 
+{{% notice tip %}}
 Copy these outputs from the stack to a scratch file, notepad or text editor for later use. These are all the resource names you'll need in subsequent modules.
+{{% /notice %}}
 
-5. SAM has now used CloudFormation to deploy a stack of backend resources which will be used for the rest of the workshop.
+6. SAM has now used CloudFormation to deploy a stack of backend resources which will be used for the rest of the workshop.
 
 * Multiple Lambda functions
 * An S3 bucket

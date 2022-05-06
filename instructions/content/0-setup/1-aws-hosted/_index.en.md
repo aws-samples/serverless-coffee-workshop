@@ -1,5 +1,5 @@
 +++
-title = "AWS Account"
+title = "AWS Hosted"
 weight = 12
 +++
 
