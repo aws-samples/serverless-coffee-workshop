@@ -5,4 +5,4 @@ weight = 11
 pre = "<b>1b. </b>"
 +++
 
-In this section, you will finish building out the workflow. Finally, you will then test the workflow. This section takes about 30 minutes.
+In this section, you will finish building out the workflow. Finally, you will then test the workflow. This section takes about 45 minutes.

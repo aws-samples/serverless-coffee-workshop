@@ -101,7 +101,7 @@ The workflow must branch logic depending on the value read from the DynamoDB tab
 
 8. Check the Amazon States Language (ASL) definition by choosing the **Definition** toggle button above the designer. The ASL appears as:
 
-```
+```JSON
 {
   "Comment": "A description of my state machine",
   "StartAt": "DynamoDB Get Shop Status",
@@ -110,7 +110,7 @@ The workflow must branch logic depending on the value read from the DynamoDB tab
       "Type": "Task",
       "Resource": "arn:aws:states:::dynamodb:getItem",
       "Parameters": {
-        "TableName": "serverlesspresso-workshop-core-2-ConfigTable-UNIQUECODE",
+        "TableName": "serverlesspresso-config-table",
         "Key": {
           "PK": {
             "S": "config"

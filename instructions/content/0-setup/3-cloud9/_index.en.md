@@ -29,35 +29,6 @@ You can run AWS CLI commands here just like you would on your local computer. Re
 
 Keep your AWS Cloud9 IDE opened in a browser tab throughout this workshop.
 
-8. Verify that your user is logged in by running the command `aws sts get-caller-identity`. Copy and paste the command into the Cloud9 terminal window.
-
-```console
-aws sts get-caller-identity
-```
-
-You'll see output indicating your account and user information:
-
-```json
-{
-    "Account": "123456789012",
-    "UserId": "AKIAI44QH8DHBEXAMPLE",
-    "Arn": "arn:aws:iam::123456789012:user/Roxie"
-}
-```
-9. Check the current AWS Region to make sure you are running the workshop in a supported Region. Run these commands in the Cloud9 terminal window:
-```bash
-AWS_REGION=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/\(.*\)[a-z]/\1/')
-SUPPORTED_REGIONS=("us-west-2" "us-east-1" "us-east-2" "eu-central-1" "eu-west-1" "ap-southeast-2" "sa-east-1" "ap-northeast-1")
-
-if [[ ! " ${SUPPORTED_REGIONS[@]} " =~ " ${AWS_REGION} " ]]; then
-    /bin/echo -e "\e[1;31m'$AWS_REGION' is not a supported AWS Region, delete this Cloud9 instance and restart the workshop in a supported AWS Region.\e[0m"
-else
-    /bin/echo -e "\e[1;32m'$AWS_REGION' is a supported AWS Region\e[0m"
-fi
-```
-Make sure the response confirms your Region is supported.
-
-![Module 0 Region check](../images/0-setup-region-check.png)
 
 {{% notice tip %}}
 
@@ -68,7 +39,7 @@ an ID or Amazon Resource Name (ARN), copy and paste that into your scratch pad.
 
 ### Recap
 
-- Use the same region you selected when deploying AWS Cloud9 IDE for the entirety of this workshop.
+- Use the same AWS region for the entirety of this workshop.
 
 - Keep your AWS Cloud9 IDE opened in a tab.
 
