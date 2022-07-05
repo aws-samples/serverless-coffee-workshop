@@ -40,6 +40,11 @@ In this section, you use an AWS SDK integration in Step Functions to query the s
   "StatusFilter": "RUNNING"
 }
 ```
+{{% notice tip %}}
+ Check you Replaced **YOUR_STATE_MACHINE_ARN** with the correct ARN.
+{{% /notice %}}
+
+
 ![Drag GetItem to designer](../images/se-mod1-capacity3.png)
 
 6. Choose the *Output* tab. Here, you will modify the state's output to include the result from the SDK call:
