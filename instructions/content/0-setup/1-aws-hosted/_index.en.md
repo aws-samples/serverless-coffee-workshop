@@ -20,7 +20,7 @@ If required, [create a new AWS account here](https://portal.aws.amazon.com/gp/aw
 To launch your personal AWS console:
 
 1. Open a Chrome or Firefox browser and navigate to https://dashboard.eventengine.run/.
-2. Enter the hash code (**{{< param "hashCode" >}}**) and click the green login button.
+2. Enter the 16-character Event Hash code received from the event organizer and click the green login button.
 
 ![Event Engine](../images/setup1.png)
 
@@ -31,9 +31,6 @@ To launch your personal AWS console:
 4. Choose *AWS Console* and then *Open AWS console* to open the AWS Management Console in your new AWS account.
 
 ![Event Engine](../images/setup3.png)
-
-5. Use the Region drop-down in the top right to ensure you are running in Oregon (us-west-2). You will use the same Region for the duration of this workshop.
-
 
 {{% notice note %}}
 This account is temporary and will be deleted after the workshop today.
