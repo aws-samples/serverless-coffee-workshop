@@ -10,42 +10,42 @@
             <va-input
               style="font-size: 24px;"
               label="Region (e.g. us-west-2)"
-              v-model="region"
+              v-model.trim="region"
             />
           </div>
           <div class="row flex" style="margin: 20px;">
             <va-input
               style="font-size: 24px;"
               label="API URL"
-              v-model="APIurl"
+              v-model.trim="APIurl"
             />
           </div>
           <div class="row flex" style="margin: 20px;">
             <va-input
               style="font-size: 24px;"
               label="Config URL"
-              v-model="ordersAPIurl"
+              v-model.trim="ordersAPIurl"
             />
           </div>
           <div class="row flex" style="margin: 20px;">
             <va-input
               style="font-size: 24px;"
               label="Host"
-              v-model="host"
+              v-model.trim="host"
             />
           </div>
           <div class="row flex" style="margin: 20px;">
             <va-input
               style="font-size: 24px;"
               label="Config endpoint"
-              v-model="ConfigEndpoint"
+              v-model.trim="ConfigEndpoint"
             />
           </div>
           <div class="row flex" style="margin: 20px;">
             <va-input
               style="font-size: 24px;"
               label="User Pool Client Id"
-              v-model="poolId"
+              v-model.trim="poolId"
             />
           </div>
 
