@@ -20,23 +20,27 @@ This frontend has already been deployed and is presented as a hosted UI at https
 
 ### Step-by-step instructions ###
 
-1. Open a new tab in your browser. We recommend using Chrome or Firefox throughout the workshop.
+Most of front end configurations have already been entered for you, you must load these by selecting the Display app URL from the Cloud Formation template outputs:
 
-![Settings page](/images/se-mod3-backend-display1.png)
+1. From the AWS Management Console, search for "Cloud Formation", then choose "Cloud Formation" from the list of results.
+![Settings page](/images/se-mod3-backend-display-setup-1.png)
 
-2. Going down the list of settings in the frontend settings page:
-- **Region**: enter the Region code you have been using during the workshop (e.g. `us-east-`).
-- **UserPoolID**: enter the value from the key `UserPoolID` from the CloudFormation stack.
-- **UserPoolWebClientID**: enter the value from the key `UserPoolWebClientID` from the CloudFormation stack.
-- **PoolId**: enter the `poolId` value from *Finding the Settings* earlier..
-- **Host**: enter the `host` value from *Finding the Settings* earlier.
-- **OrderManagerEndpoint**: enter the value from the key `OrderManagerEndpoint` from the CloudFormation stack.
-- **APIGWEndpointValidatorService**: enter the value from the key `APIGWEndpointValidatorService` from the CloudFormation stack.
-- **APIGWEndpointConfigService**: enter the value from the key `APIGWEndpointConfigService` from the CloudFormation stack.
+2. From the List of Stacks, select the **Serverlesspresso** stack, and choose the **Outputs** tab.
+![Settings page](/images/se-mod3-backend-display-setup-2.png)
 
-![Settings page](/images/se-mod3-backend-display4.png)
+3. Scroll down to the Output named *DisplayAppURI* and choose the pre created URL, Open this link in a new tab.
+![Settings page](/images/se-mod3-backend-display-setup-3.png)
 
-3. Choose **Save and reload**.
+4. This opens the display application UI with all but 2 of the configurations pre-filled.
+
+![Settings page](/images/se-mod3-backend-display-setup-4.png)
+
+5. Complete the remaining configuration settings:
+
+- **PoolId**: enter the `poolId` value from [Finding the Settings](/3-web-apps/1-overview.html#finding-the-settings) earlier..
+- **Host**: enter the `host` value from [Finding the Settings](/3-web-apps/1-overview.html#finding-the-settings) earlier.
+
+6. Choose **Save and reload**.
 
 ![Cognito signin](/images/se-mod3-backend-display5.png)
 
@@ -76,10 +80,11 @@ The Serverlesspresso application supports bother user and admin accounts. The ad
 
 8. Go back to the browser tab showing the Display App. Log in with the user you created and the the Display App is now shown.
 
-![Display app](/images/se-mod3-backend-display8.png)
+![Display app](/images/se-mod3-backend-displayNew1.png)
 
-Note the three admin buttons provided in the top right-hand corner:
+Note the 4 admin buttons provided in the top right-hand corner:
 
+* **Configure barista app**: Use this for transferring settings to the Barista App later in this section.
 * **Configure order app**: Use this for transferring settings to the Order App later in this section.
 * **Clear settings**: Empties the local settings cache and clears the backend settings. This causes the *Settings* page to be displayed the next time the page reloads. Use this if you want to change your backend settings.
 * **Sign out**: Signs out the Cognito user from the frontend and returns you to the sign-in page.

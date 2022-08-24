@@ -128,6 +128,7 @@ $RECYCLE.BIN/
 packaged.yaml
 .aws-sam
 samconfig.toml
+./setup/tmp/*
 
 # End of https://www.gitignore.io/api/osx,node,linux,windows
 instructions/public/

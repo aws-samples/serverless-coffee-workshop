@@ -41,6 +41,8 @@ Resources:
     Type: AWS::Events::EventBus
     Properties:
       Name: Serverlesspresso
+    Metadata:
+      SamResourceId: ServerlesspressoEventBus
   CoreEventBusNameParameter:
     Type: AWS::SSM::Parameter
     Properties:
@@ -50,6 +52,8 @@ Resources:
       Type: String
       Value:
         Ref: ServerlesspressoEventBus
+    Metadata:
+      SamResourceId: CoreEventBusNameParameter
   CoreEventBusARNParameter:
     Type: AWS::SSM::Parameter
     Properties:
@@ -59,12 +63,16 @@ Resources:
       Type: String
       Value:
         Fn::Sub: ${ServerlesspressoEventBus.Arn}
+    Metadata:
+      SamResourceId: CoreEventBusARNParameter
   ServerlesspressoRealtime:
     Type: AWS::IoT::Thing
     Properties:
       ThingName: serverlesspresso-realtime-workshop
       AttributePayload:
         Attributes: {}
+    Metadata:
+      SamResourceId: ServerlesspressoRealtime
   IoTRealtimeParameter:
     Type: AWS::SSM::Parameter
     Properties:
@@ -76,12 +84,14 @@ Resources:
         Fn::GetAtt:
         - IotEndpoint
         - IotEndpointAddress
+    Metadata:
+      SamResourceId: IoTRealtimeParameter
   GetIoTEndpointFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: GetIoTEndpoint.handler
       Runtime: nodejs14.x
-      CodeUri: s3://serverlesspresso-central-workshop-template/5f352d3ba76f2b06d0afc6a451d7c018
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/5f352d3ba76f2b06d0afc6a451d7c018
       MemorySize: 128
       Timeout: 3
       Policies:
@@ -92,6 +102,8 @@ Resources:
           - iot:DescribeEndpoint
           Resource:
           - '*'
+    Metadata:
+      SamResourceId: GetIoTEndpointFunction
   GetIoTEndpointLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
@@ -99,6 +111,8 @@ Resources:
         Fn::Sub: /aws/lambda/${GetIoTEndpointFunction}
       RetentionInDays:
         Ref: LogRetentionInDays
+    Metadata:
+      SamResourceId: GetIoTEndpointLogGroup
   IotEndpoint:
     Type: Custom::IotEndpoint
     Properties:
@@ -106,6 +120,8 @@ Resources:
         Fn::GetAtt:
         - GetIoTEndpointFunction
         - Arn
+    Metadata:
+      SamResourceId: IotEndpoint
   UserPool:
     Type: AWS::Cognito::UserPool
     Properties:
@@ -128,12 +144,16 @@ Resources:
           RequireNumbers: false
           RequireSymbols: false
           RequireUppercase: false
+    Metadata:
+      SamResourceId: UserPool
   UserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
       GenerateSecret: false
       UserPoolId:
         Ref: UserPool
+    Metadata:
+      SamResourceId: UserPoolClient
   UserPoolParameter:
     Type: AWS::SSM::Parameter
     Properties:
@@ -143,6 +163,8 @@ Resources:
       Type: String
       Value:
         Ref: UserPool
+    Metadata:
+      SamResourceId: UserPoolParameter
   UserPoolClientParameter:
     Type: AWS::SSM::Parameter
     Properties:
@@ -152,6 +174,8 @@ Resources:
       Type: String
       Value:
         Ref: UserPoolClient
+    Metadata:
+      SamResourceId: UserPoolClientParameter
   IdentityPool:
     Type: AWS::Cognito::IdentityPool
     Properties:
@@ -164,6 +188,8 @@ Resources:
           Fn::GetAtt:
           - UserPool
           - ProviderName
+    Metadata:
+      SamResourceId: IdentityPool
   CognitoUnAuthorizedRole:
     Type: AWS::IAM::Role
     Properties:
@@ -224,6 +250,8 @@ Resources:
                 - ':'
                 - Ref: AWS::AccountId
                 - :topic/*
+    Metadata:
+      SamResourceId: CognitoUnAuthorizedRole
   CognitoAuthorizedRole:
     Type: AWS::IAM::Role
     Properties:
@@ -284,6 +312,8 @@ Resources:
                 - ':'
                 - Ref: AWS::AccountId
                 - :topic/*
+    Metadata:
+      SamResourceId: CognitoAuthorizedRole
   IdentityPoolRoleMapping:
     Type: AWS::Cognito::IdentityPoolRoleAttachment
     Properties:
@@ -298,6 +328,8 @@ Resources:
           Fn::GetAtt:
           - CognitoUnAuthorizedRole
           - Arn
+    Metadata:
+      SamResourceId: IdentityPoolRoleMapping
   CountingTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -309,11 +341,13 @@ Resources:
       - AttributeName: PK
         KeyType: HASH
       BillingMode: PAY_PER_REQUEST
+    Metadata:
+      SamResourceId: CountingTable
   PublisherFunctionAdmin:
     Type: AWS::Serverless::Function
     Description: Serverlesspresso Publisher. Invoked by EventBridge rule
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/4952ed6cfe2b9da6083121d367a90bcd
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/4952ed6cfe2b9da6083121d367a90bcd
       Handler: publishToIOT.handler
       Runtime: nodejs14.x
       Timeout: 3
@@ -344,11 +378,13 @@ Resources:
               - prefix: OrderProcessor.
               - prefix: Validator.
               - prefix: ConfigService.
+    Metadata:
+      SamResourceId: PublisherFunctionAdmin
   PublisherFunctionUser:
     Type: AWS::Serverless::Function
     Description: Serverlesspresso Publisher. Invoked by EventBridge rule
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/4952ed6cfe2b9da6083121d367a90bcd
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/4952ed6cfe2b9da6083121d367a90bcd
       Handler: publishToIOTuserTopic.handler
       Runtime: nodejs14.x
       Timeout: 3
@@ -385,11 +421,13 @@ Resources:
               - Ref: Source
               detail-type:
               - prefix: OrderProcessor.
+    Metadata:
+      SamResourceId: PublisherFunctionUser
   PublisherFunctionConfig:
     Type: AWS::Serverless::Function
     Description: Serverlesspresso Publisher. Invoked by EventBridge rule
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/4952ed6cfe2b9da6083121d367a90bcd
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/4952ed6cfe2b9da6083121d367a90bcd
       Handler: publishToIOT.handler
       Runtime: nodejs14.x
       Timeout: 3
@@ -417,6 +455,8 @@ Resources:
               - Ref: Source
               detail-type:
               - prefix: ConfigService.
+    Metadata:
+      SamResourceId: PublisherFunctionConfig
   ConfigTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -430,6 +470,8 @@ Resources:
       BillingMode: PAY_PER_REQUEST
       StreamSpecification:
         StreamViewType: NEW_AND_OLD_IMAGES
+    Metadata:
+      SamResourceId: ConfigTable
   RESTApConfigService:
     Type: AWS::Serverless::Api
     Properties:
@@ -438,11 +480,13 @@ Resources:
         Fn::Transform:
           Name: AWS::Include
           Parameters:
-            Location: s3://serverlesspresso-central-workshop-template/29a11c54eedac3da7907b35628fbf004
+            Location: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/29a11c54eedac3da7907b35628fbf004
+    Metadata:
+      SamResourceId: RESTApConfigService
   ConfigChangedFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/1d046acb8a29b951017091a612a17b3c
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/1d046acb8a29b951017091a612a17b3c
       Handler: configChanged.handler
       Runtime: nodejs14.x
       Timeout: 15
@@ -470,6 +514,8 @@ Resources:
               - StreamArn
             BatchSize: 1
             StartingPosition: TRIM_HORIZON
+    Metadata:
+      SamResourceId: ConfigChangedFunction
   ConfigRESTApiRole:
     Type: AWS::IAM::Role
     Properties:
@@ -507,10 +553,12 @@ Resources:
                   - ConfigTable
                   - Arn
                 index: /index/*
+    Metadata:
+      SamResourceId: ConfigRESTApiRole
   GetQRcodeFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/4499e700bb05e2e83c2b6a5b3f2ee2ec
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/35aaf57d8112528334153cdceb2bc769
       Handler: getCode.handler
       Runtime: nodejs14.x
       Timeout: 15
@@ -546,10 +594,12 @@ Resources:
               Authorizer: MyCognitoAuthorizor
               AuthorizationScopes:
               - aws.cognito.signin.user.admin
+    Metadata:
+      SamResourceId: GetQRcodeFunction
   VerifyQRcodeFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/4499e700bb05e2e83c2b6a5b3f2ee2ec
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/35aaf57d8112528334153cdceb2bc769
       Handler: verifyCode.handler
       Runtime: nodejs14.x
       Timeout: 10
@@ -588,6 +638,8 @@ Resources:
               Authorizer: MyCognitoAuthorizor
               AuthorizationScopes:
               - aws.cognito.signin.user.admin
+    Metadata:
+      SamResourceId: VerifyQRcodeFunction
   RESTApiValidatorService:
     Type: AWS::Serverless::Api
     Name: RESTApiValidatorService
@@ -606,6 +658,8 @@ Resources:
               Fn::GetAtt:
               - UserPool
               - Arn
+    Metadata:
+      SamResourceId: RESTApiValidatorService
   ValidatorTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -619,10 +673,12 @@ Resources:
       BillingMode: PAY_PER_REQUEST
       StreamSpecification:
         StreamViewType: NEW_AND_OLD_IMAGES
+    Metadata:
+      SamResourceId: ValidatorTable
   FillDatabasesCustomResource:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/f52775053d6fd2e701dcb924bb328120
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/9ecf5a1e1315c123416fa43616a08253
       Handler: app.handler
       Runtime: nodejs14.x
       Timeout: 15
@@ -640,6 +696,8 @@ Resources:
       - DynamoDBCrudPolicy:
           TableName:
             Ref: CountingTable
+    Metadata:
+      SamResourceId: FillDatabasesCustomResource
   DeploymentCustomResourcePrefil:
     Type: AWS::CloudFormation::CustomResource
     Properties:
@@ -647,6 +705,8 @@ Resources:
         Fn::GetAtt:
         - FillDatabasesCustomResource
         - Arn
+    Metadata:
+      SamResourceId: DeploymentCustomResourcePrefil
   StateMachineLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
@@ -655,10 +715,12 @@ Resources:
         - /
         - - stepfunctions
           - StateMachineExpressSync
+    Metadata:
+      SamResourceId: StateMachineLogGroup
   ValidatorNewOrderFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/9d6d8e0d73867362d859d3498994ed1e
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/9d6d8e0d73867362d859d3498994ed1e
       Handler: app.handler
       Runtime: nodejs14.x
       Timeout: 15
@@ -671,26 +733,32 @@ Resources:
       - DynamoDBWritePolicy:
           TableName:
             Ref: OrderTable
+    Metadata:
+      SamResourceId: ValidatorNewOrderFunction
   SanitizeOrderLambda:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/eeb4f2b915040fc25fe13558c56944b2
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/2d235c953968ccd25a3fa52370745f64
       Handler: app.handler
       Runtime: nodejs14.x
       Timeout: 20
       MemorySize: 128
+    Metadata:
+      SamResourceId: SanitizeOrderLambda
   GetOrderByIdFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/8c33502c44f9b6c736d0e3e4dba31258
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/8c33502c44f9b6c736d0e3e4dba31258
       Handler: app.handler
       Runtime: nodejs14.x
       Timeout: 15
       MemorySize: 128
+    Metadata:
+      SamResourceId: GetOrderByIdFunction
   WorkFlowStarted:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/4a022ec7293e9f833b5df0aa6eafd4a4
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/4a022ec7293e9f833b5df0aa6eafd4a4
       Handler: app.handler
       Runtime: nodejs14.x
       Timeout: 15
@@ -703,10 +771,12 @@ Resources:
       - DynamoDBWritePolicy:
           TableName:
             Ref: OrderTable
+    Metadata:
+      SamResourceId: WorkFlowStarted
   WaitingCompletion:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://serverlesspresso-central-workshop-template/3855060f065a150c6da694ebbd20f99a
+      CodeUri: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/3855060f065a150c6da694ebbd20f99a
       Handler: app.handler
       Runtime: nodejs14.x
       Timeout: 15
@@ -726,6 +796,8 @@ Resources:
       - EventBridgePutEventsPolicy:
           EventBusName:
             Ref: ServerlesspressoEventBus
+    Metadata:
+      SamResourceId: WaitingCompletion
   OrderTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -775,6 +847,8 @@ Resources:
       BillingMode: PAY_PER_REQUEST
       StreamSpecification:
         StreamViewType: NEW_AND_OLD_IMAGES
+    Metadata:
+      SamResourceId: OrderTable
   RESTApiForOrderManager:
     Type: AWS::Serverless::Api
     Properties:
@@ -783,7 +857,9 @@ Resources:
         Fn::Transform:
           Name: AWS::Include
           Parameters:
-            Location: s3://serverlesspresso-central-workshop-template/055da658f32be5e00466cd0cb0da536c
+            Location: s3://ee-assets-prod-us-east-1/modules/67b03f2bcecc4fafb15053897585b61f/v1/bebb24d5b543739536dbb71261549d4e
+    Metadata:
+      SamResourceId: RESTApiForOrderManager
   RESTApiRole:
     Type: AWS::IAM::Role
     Properties:
@@ -806,7 +882,7 @@ Resources:
             - states:StartExecution
             Resource:
               Fn::GetAtt:
-              - OrderManagerStateMachine
+              - '02OrderManagerStateMachine'
               - Arn
           - Effect: Allow
             Action:
@@ -826,12 +902,14 @@ Resources:
                   - OrderTable
                   - Arn
                 index: /index/*
-  OrderManagerStateMachine:
+    Metadata:
+      SamResourceId: RESTApiRole
+  '02OrderManagerStateMachine':
     Type: AWS::Serverless::StateMachine
     Properties:
       DefinitionUri:
-        Bucket: serverlesspresso-central-workshop-template
-        Key: a167d5f1050d81aefd825f6767d7c510
+        Bucket: ee-assets-prod-us-east-1
+        Key: modules/67b03f2bcecc4fafb15053897585b61f/v1/a167d5f1050d81aefd825f6767d7c510
       DefinitionSubstitutions:
         OMTable:
           Ref: OrderTable
@@ -852,16 +930,15 @@ Resources:
       - DynamoDBWritePolicy:
           TableName:
             Ref: OrderTable
-      - DynamoDBWritePolicy:
-          TableName:
-            Ref: OrderTable
       - Statement:
         - Sid: SendTaskSuccess
           Effect: Allow
           Action:
           - states:SendTaskSuccess
           Resource: '*'
-  OrderProcessorRole:
+    Metadata:
+      SamResourceId: '02OrderManagerStateMachine'
+  '01OrderProcessorRole':
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -874,6 +951,8 @@ Resources:
           Action:
           - sts:AssumeRole
       Path: /
+    Metadata:
+      SamResourceId: '01OrderProcessorRole'
   RolePolicies:
     Type: AWS::IAM::Policy
     Properties:
@@ -917,62 +996,40 @@ Resources:
               - ':stateMachine:'
               - '*'
       Roles:
-      - Ref: OrderProcessorRole
+      - Ref: '01OrderProcessorRole'
+    Metadata:
+      SamResourceId: RolePolicies
 Outputs:
-  UserPoolID:
-    Description: UserPool ID
+  DisplayAppURI:
+    Description: The URL for the Display App
     Value:
-      Ref: UserPool
-  UserPoolWebClientId:
-    Description: UserPool Web Client ID
+      Fn::Sub:
+      - https://workshop-display.serverlesscoffee.com/?region=${AWS::Region}&userPoolId=${UserPoolID}&userPoolWebClientId={UserPoolWebClientId}&orderManagerEndpoint=${OrderManagerEndpoint}&APIGWEndpointValidatorService={APIGWEndpointValidatorService}&APIGWEndpointConfigService={APIGWEndpointConfigService}
+      - UserPoolID:
+          Ref: UserPool
+        UserPoolWebClientId:
+          Ref: UserPoolClient
+        OrderManagerEndpoint:
+          Fn::Sub: https://${RESTApiForOrderManager}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+        APIGWEndpointValidatorService:
+          Fn::Sub: https://${RESTApiValidatorService}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+        APIGWEndpointConfigService:
+          Fn::Sub: https://${RESTApConfigService}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+  BaristaAppURI:
+    Description: The URL for the barrista App
     Value:
-      Ref: UserPoolClient
-  OrderManagerEndpoint:
-    Description: API Prod stage endpoint
-    Value:
-      Fn::Sub: https://${RESTApiForOrderManager}.execute-api.${AWS::Region}.amazonaws.com/Prod/
-  APIGWEndpointValidatorService:
-    Description: API Prod stage endpoint
-    Value:
-      Fn::Sub: https://${RESTApiValidatorService}.execute-api.${AWS::Region}.amazonaws.com/Prod/
-  APIGWEndpointConfigService:
-    Description: API Prod stage endpoint
-    Value:
-      Fn::Sub: https://${RESTApConfigService}.execute-api.${AWS::Region}.amazonaws.com/Prod/
-  ConfigTable:
-    Value:
-      Ref: ConfigTable
-    Description: ConfigTable
-  CountingTable:
-    Value:
-      Ref: CountingTable
-    Description: Counting Table
-  CoreEventBusName:
-    Description: CoreEventBus Name
-    Value:
-      Ref: ServerlesspressoEventBus
-  SanitizeOrderLambda:
-    Description: Sanitize Order Lambda Function
-    Value:
-      Fn::GetAtt:
-      - SanitizeOrderLambda
-      - Arn
-  CoreEventBusARN:
-    Description: CoreEventBus ARN
-    Value:
-      Fn::GetAtt:
-      - ServerlesspressoEventBus
-      - Arn
-  IoTRealtimeName:
-    Description: IoTRealtime Name
-    Value:
-      Ref: ServerlesspressoRealtime
-  IotEndpointAddress:
-    Description: IotEndpointAddress URL
-    Value:
-      Fn::GetAtt:
-      - IotEndpoint
-      - IotEndpointAddress
-    Export:
-      Name:
-        Fn::Sub: ${AWS::StackName}-IotEndpointAddress
+      Fn::Sub:
+      - https://workshop-barista.serverlesscoffee.com/?region=${AWS::Region}&userPoolId=${UserPoolID}&userPoolWebClientId={UserPoolWebClientId}&orderManagerEndpoint=${OrderManagerEndpoint}&APIGWEndpointValidatorService={APIGWEndpointValidatorService}&APIGWEndpointConfigService={APIGWEndpointConfigService}
+      - UserPoolID:
+          Ref: UserPool
+        UserPoolWebClientId:
+          Ref: UserPoolClient
+        OrderManagerEndpoint:
+          Fn::Sub: https://${RESTApiForOrderManager}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+        APIGWEndpointValidatorService:
+          Fn::Sub: https://${RESTApiValidatorService}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+        APIGWEndpointConfigService:
+          Fn::Sub: https://${RESTApConfigService}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+  CustomerAppURI:
+    Description: The URL for the custoemr order App
+    Value: https://workshop-order.serverlesscoffee.com/

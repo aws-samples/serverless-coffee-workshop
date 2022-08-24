@@ -35,7 +35,7 @@ The frontends are already deployed. Once you have built the backend, you will pr
 ### Backend
 The backend application architecture uses [AWS Step Functions](https://aws.amazon.com/step-functions/), [Amazon EventBridge](https://aws.amazon.com/eventbridge/), [AWS Lambda][lambda], [Amazon API Gateway][api-gw], [Amazon S3][s3], [Amazon DynamoDB][dynamodb], and [Amazon Cognito][cognito].
 
-JavaScript executed in the frontend browser application sends and receives data from a backend API built using API Gateway and Lambda. DynamoDB provides a persistence data storage layer which is used by the API's Lambda functions. Events are routed back to the frontend applications using AWS IoT Core and Lambda.
+JavaScript executes in the frontend browser application sending to and receiving data from a backend API built using API Gateway. DynamoDB provides a persistence data storage layer which is used by the API. Events are routed back to the frontend applications using AWS IoT Core and Lambda.
 
 See the diagram below for the complete architecture.
 

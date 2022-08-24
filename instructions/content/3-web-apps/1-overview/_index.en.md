@@ -32,15 +32,26 @@ The AWS IoT Core service manages broadcasts between backend publishers and front
 
 The frontends are hosted for you and require configuration to connect to the backend you have deployed in this workshop. The settings for all three applications are the same but you must configure each individually.
 
-1. In the AWS Cloud9 terminal, run this command to retrieve the `poolId` value:
+You will run some AWS CLI commands using [AWS CloudShell](https://aws.amazon.com/cloudshell/), a browser-based shell terminal that makes it easy to securely manage, explore, and interact with your AWS resources. 
+
+### To start AWS CloudShell: ###
+
+1. In the Search Bar of the AWS Management Console type *CloudShell*, and chose CloudShell from the search options:
+
+![CloudShell output](/images/se-mod3-cloudshell-1.png)
+
+2. Choose *Close*, to progress past the welcome alert:
+
+![CloudShell output](/images/se-mod3-cloudshell-2.png)
+
+3. In the CloudShell terminal, enter the following command to retrieve the `poolId` value:
 
 ```
 aws cognito-identity list-identity-pools --max-results 10
 ```
-
 ![Terminal output](/images/se-mod3-frontends-setup1.png)
 
-2. Run this command to retrieve the `host` value:
+4. Run this command to retrieve the `host` value:
 
 ```
 aws iot describe-endpoint --endpoint-type iot:Data-ATS
@@ -48,16 +59,4 @@ aws iot describe-endpoint --endpoint-type iot:Data-ATS
 
 ![Terminal output](/images/se-mod3-frontends-setup2.png)
 
-3. You will need the outputs that you saved from the core deployment in the *Setup* module. If you have these, skip ahead to the next section, otherwise continue.
-
-4. You can fetch the outputs from the CloudFormation stack deployed by AWS SAM. Navigate to the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation/home). Make sure that the Region is the same.
-
-5. Select the *Stacks* menu on the left, then choose the *Stack name* *serverlesspresso-backend*.
-
-![CloudFormation stacks](/images/se-mod3-backend-display2.png)
-
-6. Select the *Outputs* tab. This displays the resource names and values needed for the front-end configuration settings.
-
-![CloudFormation stack outputs](/images/se-mod3-backend-display3.png)
-
-Wherever the instructions reference the "Key" names, enter the corresponding "Value". The values uniquely identify resources in your backend stack.
+Copy these two values to a scratch pad, you will need them in "The Display App" section.

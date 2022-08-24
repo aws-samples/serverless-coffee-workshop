@@ -20,25 +20,18 @@ This frontend has already been deployed and is presented as a hosted UI at https
 
 ### Step-by-step instructions ###
 
-1. Open a new tab in your browser. We recommend using Chrome or Firefox throughout the workshop.
+1. You can transfer the configuration from the Display App to avoid typing the settings manually. If you have configured the Display App, switch to that tab in your browser, or navigate to https://workshop-display.serverlesscoffee.com/. Choose the **Configure Barista app** button in the toolbar.
 
-![Settings page](/images/se-mod3-frontends-barista1.png)
 
-2. Going down the list of settings in the frontend settings page:
-- **Region**: enter the Region code you have been using during the workshop (e.g. `us-east-`).
-- **UserPoolID**: enter the value from the key `UserPoolID` from the CloudFormation stack.
-- **UserPoolWebClientID**: enter the value from the key `UserPoolWebClientID` from the CloudFormation stack.
-- **PoolId**: enter the `poolId` value from *Finding the Settings* earlier..
-- **Host**: enter the `host` value from *Finding the Settings* earlier.
-- **OrderManagerEndpoint**: enter the value from the key `OrderManagerEndpoint` from the CloudFormation stack.
-- **APIGWEndpointValidatorService**: enter the value from the key `APIGWEndpointValidatorService` from the CloudFormation stack.
-- **APIGWEndpointConfigService**: enter the value from the key `APIGWEndpointConfigService` from the CloudFormation stack.
+![Settings page](/images/se-mod3-backend-baristaNew1.png)
 
-![Settings page](/images/se-mod3-frontends-barista2.png)
+2. This opens the Barista App configuration page in a new window with the backend settings embedded into the URL query string.
 
-3. Choose **Save and reload**.
+![Settings page](/images/se-mod3-backend-baristaNew2.png)
 
-4. Select the *Sign In* tab. Enter the email and password for the account you configured in the previous section. Choose **Sign In**
+6. Choose **Save and reload**.
+
+7. Select the *Sign In* tab. Enter the email and password for the account you configured in the previous section. Choose **Sign In**
 
 ![Signin screen](/images/se-mod3-frontends-setup3.png)
 

@@ -62,16 +62,40 @@ In this section, you will test the rule that starts the **OrderProcessor** workf
 
 ### Step-by-step instructions ###
 
-1. Go to the tab with AWS Cloud9 terminal. If you have closed this tab, go to the AWS Management Console, Select **Services** then select [**AWS Cloud9**](https://console.aws.amazon.com/cloud9/home) under Developer Tools. In the *Serverlesspresso* environment, choose **Open IDE**. Within a couple of minutes, the environment will be ready.
+From the AWS EventBridge Console, under *Events*:
+1. Choose **Event busses**.
+2. Choose the **Serverlesspresso** event bus
 
-2. In the terminal, to emit the `NewOrder` event to the `serverlesspresso` event bus, run:
+![Select event bus](../images/se-mod2-newOrder-test1.png)
+
+3. Choose **Send events**
+![Select send events](../images/se-mod2-newOrder-test2.png)
+
+
+4. Check that the *serverlesspresso* event bus is selected
+5. Copy the following into the *Event source* input:
 ```
-aws events put-events --entries '[{"Source":"awsserverlessda.serverlesspresso", "DetailType":"Validator.NewOrder", "EventBusName":"Serverlesspresso", "Detail": "{\"userId\":\"1\",\"orderId\":\"1\"}"}]'
-
+awsserverlessda.serverlesspresso
 ```
-This should return an event ID:
 
-![Execution results](../images/se-mod2-NewOrder1.png)
+6. Copy the following into the *Detail type* input:
+```
+Validator.NewOrder
+```
+
+7. Copy the following into the *Event detail* input:
+```
+{"userId":"1","orderId":"1"}
+```
+
+8. Choose *Send*
+
+![Select send events](../images/se-mod2-newOrder-test3.png)
+
+
+This should create an event ID with a confirmation summary:
+
+![Select send events](../images/se-mod2-newOrder-test4.png)
 
 This starts a new execution in the `OrderProcessor` workflow.
 

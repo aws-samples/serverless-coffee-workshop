@@ -156,7 +156,7 @@ In this section, you will test the changes to the workflow.
 
 1. From the previous section, on the page showing the new workflow, choose **Start execution**.
 
-2. In the *Start execution* pop-up, enter the following JSON payload, then choose **Start execution**:
+2. In the *Start execution* pop-up, enter the following JSON payload:
 
 ```
 {
@@ -167,15 +167,31 @@ In this section, you will test the changes to the workflow.
 }
 ```
 
-3. The console shows the *Execution status* of *Running*. The left side shows the flow of execution with the green states showing the actual path. The blue state shows when execution is suspended, pending a callback.
+3. Choose **Start execution**
+
+4. The console shows the *Execution status* of *Running*. The left side shows the flow of execution with the green states showing the actual path. The blue state shows when execution is suspended, pending a callback.
 
 ![Execution results](../images/se-mod1-wait11.png)
 
-4. In the *Execution event history* panel, open the *TaskScheduled* event for *Emit - Workflow Started TT*. This displays the payload for this event. Copy the *TaskToken* value to a scratch pad.
+5. In the *Execution event history* panel, open the *TaskScheduled* event for *Emit - Workflow Started TT*. This displays the payload for this event. Copy the *TaskToken* value to a scratch pad.
 
 ![Execution results](../images/se-mod1-wait12.png)
 
-5. Use the SendTaskSuccess API callback to the workflow with the task token and continue execution. In the Cloud9 tab, in the terminal panel, enter the following command, replacing `YOUR_TASK_TOKEN` with the token value:
+6. Use the SendTaskSuccess API callback to resume the workflow with the task token and continue execution. 
+
+You will use a service called [AWS CloudShell](https://aws.amazon.com/cloudshell/) a browser-based shell terminal that makes it easy to securely manage, explore, and interact with your AWS resources to run the API command.
+
+### To start AWS CloudShell: ###
+
+1. In the Search Bar of the AWS Management Console type *CloudShell*, and chose CloudShell from the search options:
+
+![CloudShell output](/images/se-mod3-cloudshell-1.png)
+
+2. Choose *Close*, to progress past the welcome alert:
+
+![CloudShell output](/images/se-mod3-cloudshell-2.png)
+
+3. In the CloudShell terminal, enter the following command replacing `YOUR_TASK_TOKEN` with the token value:
 
 ```
 aws stepfunctions send-task-success  --task-output '{"orderId":1}' --task-token YOUR_TASK_TOKEN
@@ -186,7 +202,7 @@ Execution continues to the next state waiting for a callback.
 
 6. In the *Execution event history* panel, open the *TaskScheduled* event for *Emit - Awaiting completion TT*. This displays the payload for this event. Copy the *TaskToken* value to a scratch pad.
 
-7. Use the SendTaskSuccess API callback to the workflow with the task token and continue execution. In the Cloud9 tab, in the terminal panel, enter the following command, replacing `YOUR_TASK_TOKEN` with the token value:
+7. Use the SendTaskSuccess API callback to the workflow with the task token and continue execution. In the CloudShell terminal, enter the following command, replacing `YOUR_TASK_TOKEN` with the token value:
 
 ```
 aws stepfunctions send-task-success  --task-output '{"orderId":1}' --task-token YOUR_TASK_TOKEN

@@ -793,7 +793,7 @@ Resources:
             - Effect: "Allow"
               Action:
               - states:StartExecution
-              Resource: !GetAtt OrderManagerStateMachine.Arn
+              Resource: !GetAtt 02OrderManagerStateMachine.Arn
             - Effect: "Allow"
               Action:
               - dynamodb:GetItem
@@ -807,7 +807,7 @@ Resources:
                 - {tableArn: !GetAtt OrderTable.Arn, index: "/index/*"}
 
   #  Order Manager SFN                                                   #
-  OrderManagerStateMachine:
+  02OrderManagerStateMachine:
     Type: AWS::Serverless::StateMachine # More info about State Machine Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html
     Properties:
       DefinitionUri: ../backends/5-order-manager/statemachine/om.asl.json
@@ -838,7 +838,7 @@ Resources:
 ##########################################
 # Order Processor IAM ROLE               #
 ##########################################
-  OrderProcessorRole:
+  01OrderProcessorRole:
     Type: "AWS::IAM::Role"
     Properties:
       AssumeRolePolicyDocument:
@@ -875,7 +875,7 @@ Resources:
             Action: "states:ListExecutions"
             Resource: !Join [ "", [ "arn:aws:states:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":stateMachine:", "*"] ]
       Roles:
-        - Ref: "OrderProcessorRole"
+        - Ref: "01OrderProcessorRole"
 
 ##########################################
 # Outputs                                #
@@ -883,55 +883,62 @@ Resources:
 
 Outputs:
 
-  UserPoolID:
-    Description: UserPool ID
-    Value: !Ref UserPool
+  DisplayAppURI:
+    Description: The URL for the Display App
+    Value: !Sub  
+      - "https://workshop-display.serverlesscoffee.com/?region=${AWS::Region}&userPoolId=${UserPoolID}&userPoolWebClientId=${UserPoolWebClientId}&orderManagerEndpoint=${OrderManagerEndpoint}&APIGWEndpointValidatorService=${APIGWEndpointValidatorService}&APIGWEndpointConfigService=${APIGWEndpointConfigService}"
+      - UserPoolID: !Ref UserPool
+        UserPoolWebClientId: !Ref UserPoolClient
+        OrderManagerEndpoint:           !Sub "https://${RESTApiForOrderManager}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+        APIGWEndpointValidatorService:  !Sub "https://${RESTApiValidatorService}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+        APIGWEndpointConfigService:     !Sub "https://${RESTApConfigService}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
 
-  UserPoolWebClientId:
-    Description: UserPool Web Client ID
-    Value: !Ref UserPoolClient
+  # UserPoolID:
+  #   Description: UserPool ID
+  #   Value: !Ref UserPool
 
-  OrderManagerEndpoint:
-    Description: "API Prod stage endpoint"
-    Value: !Sub "https://${RESTApiForOrderManager}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  # UserPoolWebClientId:
+  #   Description: UserPool Web Client ID
+  #   Value: !Ref UserPoolClient
 
-  APIGWEndpointValidatorService:
-    Description: "API Prod stage endpoint"
-    Value: !Sub "https://${RESTApiValidatorService}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  # OrderManagerEndpoint:
+  #   Description: "API Prod stage endpoint"
+  #   Value: !Sub "https://${RESTApiForOrderManager}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
 
-  APIGWEndpointConfigService:
-    Description: "API Prod stage endpoint"
-    Value: !Sub "https://${RESTApConfigService}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  # APIGWEndpointValidatorService:
+  #   Description: "API Prod stage endpoint"
+  #   Value: !Sub "https://${RESTApiValidatorService}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
 
-  ConfigTable:
-    Value: !Ref ConfigTable
-    Description: ConfigTable
+  # APIGWEndpointConfigService:
+  #   Description: "API Prod stage endpoint"
+  #   Value: !Sub "https://${RESTApConfigService}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
 
-  CountingTable:
-    Value: !Ref CountingTable
-    Description: Counting Table
+  # ConfigTable:
+  #   Value: !Ref ConfigTable
+  #   Description: ConfigTable
 
-  CoreEventBusName:
-    Description: CoreEventBus Name
-    Value: !Ref ServerlesspressoEventBus
+  # CountingTable:
+  #   Value: !Ref CountingTable
+  #   Description: Counting Table
 
-  SanitizeOrderLambda:
-    Description: Sanitize Order Lambda Function
-    Value: !GetAtt SanitizeOrderLambda.Arn
+  # CoreEventBusName:
+  #   Description: CoreEventBus Name
+  #   Value: !Ref ServerlesspressoEventBus
 
-  CoreEventBusARN:
-    Description: CoreEventBus ARN
-    Value: !GetAtt ServerlesspressoEventBus.Arn
+  # SanitizeOrderLambda:
+  #   Description: Sanitize Order Lambda Function
+  #   Value: !GetAtt SanitizeOrderLambda.Arn
 
+  # CoreEventBusARN:
+  #   Description: CoreEventBus ARN
+  #   Value: !GetAtt ServerlesspressoEventBus.Arn
 
+  # IoTRealtimeName:
+  #   Description: IoTRealtime Name
+  #   Value: !Ref ServerlesspressoRealtime
 
-
-  IoTRealtimeName:
-    Description: IoTRealtime Name
-    Value: !Ref ServerlesspressoRealtime
-
-  IotEndpointAddress:
-    Description: IotEndpointAddress URL
-    Value: !GetAtt IotEndpoint.IotEndpointAddress
-    Export:
-      Name: !Sub "${AWS::StackName}-IotEndpointAddress"
+  # IotEndpointAddress:
+  #   Description: IotEndpointAddress URL
+  #   Value: !GetAtt IotEndpoint.IotEndpointAddress
+  #   Export:
+  #     Name: !Sub "${AWS::StackName}-IotEndpointAddress"

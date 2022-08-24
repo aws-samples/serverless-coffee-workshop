@@ -69,15 +69,32 @@ In this section, you will test that the rule invokes the *WorkflowStarted* Lambd
 
 ### Step-by-step instructions ###
 
-To start a new workflow:
+To start a new workflow, from the AWS EventBridge Console, under *Events*:
+1. Choose **Event busses**.
+2. Choose the **Serverlesspresso** event bus
+![Select event bus](../images/se-mod2-newOrder-test1.png)
+3. Choose **Send events**
+![Select send events](../images/se-mod2-newOrder-test2.png)
 
-1. From the [AWS Cloud 9](https://console.aws.amazon.com/cloud9) terminal, run the following AWS CLI command. This emits a `NewOrder` event to the `Serverlesspresso` event bus that starts the `OrderProcessor` workflow:
+4. Check that the *serverlesspresso* event bus is selected
+5. Copy the following into the *Event source* input:
 ```
-aws events put-events --entries '[{"Source":"awsserverlessda.serverlesspresso", "DetailType":"Validator.NewOrder", "EventBusName":"Serverlesspresso", "Detail": "{\"userId\":\"1\",\"orderId\":\"1\"}"}]'
-
+awsserverlessda.serverlesspresso
 ```
 
-![CLI command](../images/se-mod2-workflowStarted8.png)
+6. Copy the following into the *Detail type* input:
+```
+Validator.NewOrder
+```
+
+7. Copy the following into the *Event detail* input:
+```
+{"userId":"1","orderId":"1"}
+```
+
+8. Choose *Send*
+
+![Select send events](../images/se-mod2-newOrder-test3.png)
 
 The rule you created called *NewOrder* triggers the `OrderProcessor` workflow. This in turn sends a `WorkflowStarted` event to the *Serverlesspresso event bus*.
 

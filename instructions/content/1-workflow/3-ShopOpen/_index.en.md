@@ -66,7 +66,7 @@ The workflow must branch logic depending on the value read from the DynamoDB tab
 
 ### Step-by-step instructions ##
 
-1. From the *Flow* tab, drag the *Choice* state to under the *DynamoDB GetItem* state.
+1. From the *Flow* tab, drag the *Choice* state to under the *DynamoDB* `GetItem`  state.
 
 ![Drag GetItem to designer](../images/se-mod1-open6.png)
 

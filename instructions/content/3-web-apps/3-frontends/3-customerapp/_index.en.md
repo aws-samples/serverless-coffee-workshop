@@ -22,7 +22,7 @@ This frontend has already been deployed and is presented as a hosted UI at https
 
 1. You can transfer the configuration from the Display App to avoid typing the settings manually on your smartphone. If you have configured the Display App, switch to that tab in your browser, or navigate to https://workshop-display.serverlesscoffee.com/. Choose the **Configure order app** button in the toolbar.
 
-![Settings page](/images/se-mod3-frontends-customer1.png)
+![Settings page](/images/se-mod3-backend-OrderNew1.png)
 
 2. This opens a popup containing a QR code, which embeds the backend settings into a query string.
 

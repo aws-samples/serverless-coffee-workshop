@@ -17,7 +17,7 @@ This section moves between different workflows and services. The prepare, open t
 
 - In the first tab, go to the Step Functions console and open the *OrderProcessorWorkflow*. This is the workflow you built in module 1.
 - In the second tab, go to the Step Functions console and open the *OrderManagerStateMachine*. This workflow was deployed in the setup module.
-- Ensure you have the [AWS Cloud 9](https://console.aws.amazon.com/cloud9) open in another tab.
+- Ensure you have the *EventBridge* Console  open in another tab.
 
 The instructions below will use all of these tabs, so leave these open for the duration of this section.
 
@@ -27,13 +27,32 @@ First, create a new workflow execution to simulate an incoming order caused by a
 
 ### Step-by-step instructions ###
 
-To start a new workflow execution:
+To start a new workflow, from the AWS EventBridge Console, under *Events*:
+1. Choose **Event busses**.
+2. Choose the **Serverlesspresso** event bus
+![Select event bus](../images/se-mod2-newOrder-test1.png)
+3. Choose **Send events**
+![Select send events](../images/se-mod2-newOrder-test2.png)
 
-1. From the AWS Cloud9 tab, run the following AWS CLI command. This emits the `NewOrder` event to the `serverlesspresso` event bus that starts the `OrderProcessor` workflow:
+4. Check that the *serverlesspresso* event bus is selected
+5. Copy the following into the *Event source* input:
 ```
-aws events put-events --entries '[{"Source":"awsserverlessda.serverlesspresso", "DetailType":"Validator.NewOrder", "EventBusName":"Serverlesspresso", "Detail": "{\"userId\":\"1\",\"orderId\":\"2\"}"}]'
+awsserverlessda.serverlesspresso
+```
 
+6. Copy the following into the *Detail type* input:
 ```
+Validator.NewOrder
+```
+
+7. Copy the following into the *Event detail* input:
+```
+{"userId":"1","orderId":"2"}
+```
+
+8. Choose *Send*
+
+
 2. Go to the *OrderProcessorWorkflow* tab. In the *Executions* panel, open the most recent execution in a *Running* state.
 
 ![Execution results](../images/se-mod3-events5-2.png)
