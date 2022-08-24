@@ -1,6 +1,6 @@
 +++
 title = "AWS Hosted"
-weight = 12
+weight = 2
 +++
 
 To complete this workshop, you will need an AWS account and access to create AWS resources within that account.
