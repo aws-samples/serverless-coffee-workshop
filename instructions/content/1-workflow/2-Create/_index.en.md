@@ -49,15 +49,15 @@ After this section, you will have a workflow that you will use to build out the 
 
 7. On the *Specify state machine settings* page, this shows the settings for the new workflow. You can also edit these later.
 
-![State machine settings](../images/se-mod1-create6.png)
+![State machine settings](../images/se-mod1-create6new.png)
 
 (A) For *Name*, enter **OrderProcessorWorkflow**.
 
 (B) For *Permissions*, choose *Choose an existing role*. Select the role that 
-begins with *serverlesspresso-backend-OrderProcessorRole*. This role has been created for you during the setup module.
+contains *-01OrderProcessorRole-*. This role has been created for you.
 
 {{% notice tip %}}
- Check you selected "serverlesspresso-backend-**OrderProcessorRole**."
+ Check you selected "**01OrderProcessorRole**."
 {{% /notice %}}
 
 

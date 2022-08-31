@@ -79,9 +79,12 @@ In this section, you add an EventBridge PutEvents state that emits an event when
 
 10. With the state selected, the attribute panel on the right shows the configuration for this state.
 - In the *Configuration tab*, for *State Name*, enter `Customer timedout`.
-- In the *Output tab*, for *Result*, enter `"Customer timedout"`.
+- In the *Output tab*, for *Result*, enter `"Customer timedout"` (including the quotes).
+- Select *Add Original input to output using ResultPath*
+- In the input field enter `$.cause`.
 
-![Renamed pass state](../images/se-mod1-wait5c.png)
+![Renamed pass state](../images/se-mod1-wait5cNew.png)
+
 
 ## 2. Adding a callback state for baristas to make an order
 
@@ -143,6 +146,8 @@ In this section, you add an EventBridge PutEvents state that emits an event when
 7. With the state selected, the attribute panel on the right shows the configuration for this state.
 - In the *Configuration tab*, for *State Name*, enter `Barista timedout`.
 - In the *Output tab*, for *Result*, enter `"Barista timedout"` (including the quotes).
+- Select *Add Original input to output using ResultPath*
+- In the input field enter `$.cause`.
 
 8. Choose **Apply and exit**. In the Edit page, choose **Save**.
 

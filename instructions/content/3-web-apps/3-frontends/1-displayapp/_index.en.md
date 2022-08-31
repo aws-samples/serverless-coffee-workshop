@@ -25,11 +25,13 @@ Most of front end configurations have already been entered for you, you must loa
 1. From the AWS Management Console, search for "Cloud Formation", then choose "Cloud Formation" from the list of results.
 ![Settings page](/images/se-mod3-backend-display-setup-1.png)
 
-2. From the List of Stacks, select the **Serverlesspresso** stack, and choose the **Outputs** tab.
-![Settings page](/images/se-mod3-backend-display-setup-2.png)
+2. From the List of Stacks, select the core stack it should be named something like **mod-67b03f2bcecc4faf**. 
 
-3. Scroll down to the Output named *DisplayAppURI* and choose the pre created URL, Open this link in a new tab.
-![Settings page](/images/se-mod3-backend-display-setup-3.png)
+3.Cchoose the **Outputs** tab.
+
+
+4. Find Output named *DisplayAppURI* and choose the pre created URL, Open this link in a new tab.
+![Settings page](/images/se-mod3-backend-display-setup-3-new.png)
 
 4. This opens the display application UI with all but 2 of the configurations pre-filled.
 
