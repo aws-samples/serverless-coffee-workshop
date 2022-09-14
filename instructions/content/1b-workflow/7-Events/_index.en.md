@@ -31,7 +31,7 @@ In this section, you add an EventBridge PutEvents state that emits an event if e
 ![Drag PutEvents to designer](../images/se-mod1-wait15.png)
 
 5. With the state selected, the attribute panel on the right shows the configuration for this state. In the *Configuration tab*:
-- For *State name*, enter **Emit - error timeout**.
+- For *State name*, enter `Emit - error timeout`.
 - Ensure Wait for callback is **unchecked**.
 - For *API Parameters*, paste the following JSON:
 
