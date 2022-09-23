@@ -13,7 +13,7 @@ There are 3 steps:
 
 ### Setting up your browser tabs
 
-This section moves between different workflows and services. The prepare, open multiple tabs in your browser:
+This section moves between different workflows and services. To prepare, open multiple tabs in your browser:
 
 - In the first tab, go to the Step Functions console and open the *OrderProcessorWorkflow*. This is the workflow you built in module 1.
 - In the second tab, go to the Step Functions console and open the *OrderManagerStateMachine*. This workflow was deployed in the setup module.
