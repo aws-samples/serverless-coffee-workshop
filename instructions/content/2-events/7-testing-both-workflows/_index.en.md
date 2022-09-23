@@ -13,11 +13,12 @@ There are 3 steps:
 
 ### Setting up your browser tabs
 
-This section moves between different workflows and services. The prepare, open two tabs in your browser:
+This section moves between different workflows and services. The prepare, open multiple tabs in your browser:
 
 - In the first tab, go to the Step Functions console and open the *OrderProcessorWorkflow*. This is the workflow you built in module 1.
 - In the second tab, go to the Step Functions console and open the *OrderManagerStateMachine*. This workflow was deployed in the setup module.
-- Ensure you have the *EventBridge* Console  open in another tab.
+- Ensure you have the *EventBridge* Console open in another tab.
+- Finally, open the *DynamoDB* Console open in another tab.
 
 The instructions below will use all of these tabs, so leave these open for the duration of this section.
 

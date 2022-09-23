@@ -61,7 +61,7 @@ In this section, you add an EventBridge PutEvents state that emits an event if e
 
 ## 2. Emitting an order finished event.
 
-In this section, you add an EventBridge PutEvents state that emits an event if the shop is closed or there is no capacity to accept new orders.
+In this section, you add an EventBridge PutEvents state that emits a final event when the order has finished, and the workflow has completed.
 
 ### Step-by-step instructions ##
 
