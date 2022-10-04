@@ -30,7 +30,7 @@ In this section, you use an AWS SDK integration in Step Functions to query the s
 ![Drag GetItem to designer](../images/se-mod1-capacity2.png)
 
 5. With the state selected, the attribute panel on the right shows the configuration for this state. In the *Configuration tab*:
-- For *State name*, enter **ListExecutions**.
+- For *State name*, enter `ListExecutions`.
 - For *API Parameters*, paste the following JSON, replacing `YOUR_STATE_MACHINE_ARN` with the ARN you copied earlier.
 
 ```

@@ -30,7 +30,7 @@ In this section, you use a DynamoDB integration in Step Functions to increment a
 ![Drag UpdateItem to designer](../images/se-mod1-ordernum1.png)
 
 5. With the state selected, the attribute panel on the right shows the configuration for this state. In the *Configuration tab*:
-- For *State name*, enter **Generate Order Number**.
+- For *State name*, enter `Generate Order Number`.
 - For *API Parameters*, paste the following DynamoDB query:
 
 ```

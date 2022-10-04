@@ -31,7 +31,7 @@ In this section, you add an EventBridge PutEvents state that emits an event when
 ![Drag UpdateItem to designer](../images/se-mod1-wait1.png)
 
 5. With the state selected, the attribute panel on the right shows the configuration for this state. In the *Configuration tab*:
-- For *State name*, enter **Emit - Workflow Started TT**.
+- For *State name*, enter `Emit - Workflow Started TT`.
 - For *Wait for callback*, check this box.
 - For *API Parameters*, paste the following JSON:
 

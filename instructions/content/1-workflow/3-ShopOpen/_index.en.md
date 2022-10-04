@@ -39,7 +39,7 @@ In this section, you use a direct service integration in Step Functions to query
 ![Drag GetItem to designer](../images/se-mod1-open3.png)
 
 2. With the state selected, the attribute panel on the right shows the configuration for this state. In the *Configuration tab*:
-- For *State name*, enter **DynamoDB Get Shop status**.
+- For *State name*, enter `DynamoDB Get Shop status`.
 - For *API Parameters*, paste the following DynamoDB query:
 
 ```
