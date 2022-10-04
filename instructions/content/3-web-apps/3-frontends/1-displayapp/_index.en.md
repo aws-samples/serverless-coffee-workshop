@@ -27,7 +27,7 @@ Most of front end configurations have already been entered for you, you must loa
 
 2. From the List of Stacks, select the core stack it should be named something like **mod-67b03f2bcecc4faf**. 
 
-3.Cchoose the **Outputs** tab.
+3.Choose the **Outputs** tab.
 
 
 4. Find Output named *DisplayAppURI* and choose the pre created URL, Open this link in a new tab.
@@ -48,7 +48,7 @@ Most of front end configurations have already been entered for you, you must loa
 
 ## Setting up a user account
 
-The Serverlesspresso application supports bother user and admin accounts. The admin account can log into the Display and Barista apps, whereas users can only log into the Customer app. In this section, you will create an admin user to log into all apps.
+The Serverlesspresso application supports both user and admin accounts. The admin account can log into the Display and Barista apps, whereas users can only log into the Customer app. In this section, you will create an admin user to log into all apps.
 
 ### Step-by-step instructions ###
 

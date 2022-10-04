@@ -68,7 +68,7 @@ In this section, you add an EventBridge PutEvents state that emits an event when
 
 ![Drag UpdateItem to designer](../images/se-mod1-wait4.png)
 
-8. On the *Error handling tab*, for *Heartbeat*, enter `900` seconds. This means that the workflow will time out if the callback is not received within 15 minutes.
+8. On the *Error handling tab*, for *Heartbeat*, enter `300` seconds. This means that the workflow will time out if the callback is not received within 5 minutes.
 
 ![Configure heartbeat](../images/se-mod1-wait4c.png)
 

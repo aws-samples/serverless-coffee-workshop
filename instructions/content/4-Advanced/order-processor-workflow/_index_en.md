@@ -28,13 +28,13 @@ aws stepfunctions start-execution --state-machine-arn YOUR_STATE_MACHINE_ARN --i
 
 ## 2. Testing timed out orders
 
-When you created the workflow, you added two transitions that wait for callbacks. These allow time for the customer to submit their order details, or the barista to make the drinks. The customer has 15 minutes to complete this step, and the barista has 15 minutes.
+When you created the workflow, you added two transitions that wait for callbacks. These allow time for the customer to submit their order details, or the barista to make the drinks. The customer has 5 minutes to complete this step, and the barista has 15 minutes.
 
 In this section, you will see what happens when a timeout occurs, using the executions you started in the previous step.
 
 ### Step-by-step instructions ##
 
-After 15 minutes have elapsed since you started the execution list, the executions that were running will terminate with a *Failed* state.  
+After 5 minutes have elapsed since you started the execution list, the executions that were running will terminate with a *Failed* state.  
 
 {{% notice info %}}
 Complete the following steps to see this for yourself, or move ahead to the [module review section](/1b-workflow/9-review.html).
@@ -45,7 +45,7 @@ Complete the following steps to see this for yourself, or move ahead to the [mod
 
 2. From the left-hand menu, select *State machine* and choose **OrderProcessorWorkflow** from the list.
 
-3. After 15 minutes have elapsed since you started the execution list. You will see that the executions that were running are now in a *Failed* state.
+3. After 5 minutes have elapsed since you started the execution list. You will see that the executions that were running are now in a *Failed* state.
 
 ![Timed out executions](/images/se-mod1-testing5.png)
 
