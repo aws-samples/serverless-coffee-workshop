@@ -1,0 +1,180 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverlesspresso
+
+Resources:
+
+  MetricsQueue:
+    Type: AWS::SQS::Queue
+    Properties: 
+      QueueName: MetricsQueue
+      ReceiveMessageWaitTimeSeconds: 5
+      VisibilityTimeout: 30
+
+  QueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues: 
+        - !Ref MetricsQueue
+      PolicyDocument: 
+        Statement:
+          -
+            Action:
+              - SQS:*
+            Effect: Allow
+            Resource: !Ref MetricsQueue
+            Principal:  
+              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:root"
+          -
+            Action:
+              - SQS:SendMessage
+            Effect: Allow
+            Resource: !Ref MetricsQueue
+            Principal:  
+              Service:  "events.amazonaws.com"
+            #Condition:
+            #  ArnEquals:
+            #    !Sub "arn:aws:events:${AWS::Region}:${AWS::AccountId}:rule/Serverlesspresso/OrderJourney"
+
+  MetricsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: serverlesspresso-metrics-table
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+        - AttributeName: SK
+          AttributeType: S
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+        - AttributeName: SK
+          KeyType: RANGE
+
+  PublishMetrics:
+    Type: AWS::Serverless::Function
+    Properties: 
+      InlineCode: |
+          const dynamodb = require('aws-sdk/clients/dynamodb');
+          const docClient = new dynamodb.DocumentClient();
+
+          exports.handler = async (event) => {
+              console.log(event)
+              const date = new Date().toISOString().slice(0, 10);
+              var tableName = "serverlesspresso-metrics-table"
+              for (const record of event.Records) {
+                  const body = JSON.parse(record.body)
+                  const orderId = body["detail"]["orderId"]
+                  console.log(orderId)
+                  var params = {
+                    ExpressionAttributeValues: {
+                      ':pk': "orders",
+                      ':id': orderId.toString(),
+                    },
+                  KeyConditionExpression: 'PK = :pk and SK = :id',
+                  TableName: 'serverlesspresso-order-table'
+                  };
+              const response = await docClient.query(params).promise();
+                  const orderDetails = JSON.parse(response["Items"][0]["drinkOrder"])
+                  var transactParams = {
+                  TransactItems: [
+                      {
+                          Update: {
+                              TableName : tableName,
+                              Key:{
+                                  "PK": "Aggregate",
+                                  "SK": `${date}#TotalSales`
+                              },
+                              UpdateExpression: "SET #val = if_not_exists(#val, :initial) + :num",
+                              ExpressionAttributeNames: {
+                                  '#val'   : `val`,
+                              },                        
+                              ExpressionAttributeValues: {
+                                  ":num": 1,
+                                  ":initial": 0,
+                              }
+                          }
+                      },
+                      {
+                          Update: {
+                              TableName : tableName,
+                              Key:{
+                                  "PK": "Aggregate",
+                                  "SK": `${date}#${orderDetails["drink"]}`
+                              },
+                              UpdateExpression: "SET #val = if_not_exists(#val, :initial) + :num",
+                              ExpressionAttributeNames: {
+                                  '#val'   : `val`,
+                              },
+                              ExpressionAttributeValues: {
+                                  ":num": 1,
+                                  ":initial": 0,
+                              }
+                          }
+                      }
+                  ]
+              }
+              try {
+                  await docClient.transactWrite(transactParams).promise()
+              }
+              catch(e) {
+                  console.log(e)
+                  throw new Error(e.message)
+              }
+              }
+              const response = {
+                  statusCode: 200,
+                  body: JSON.stringify('Hello from Lambda!'),
+              };
+              return response;
+          };
+      Description: Publish Event Metrics for Serverlesspresso
+      Handler: index.handler
+      MemorySize: 128
+      Runtime: nodejs16.x
+      ReservedConcurrentExecutions: 1
+      Timeout: 30
+
+  PublishMetricsTableConnector:
+    Type: AWS::Serverless::Connector
+    Properties:
+      Source:
+        Id: PublishMetrics
+      Destination:
+        Id: MetricsTable
+      Permissions:
+        - Write
+
+  PublishMetricsOrdersTableConnector:
+    Type: AWS::Serverless::Connector
+    Properties:
+      Source:
+        Id: PublishMetrics
+      Destination:
+        Arn: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/serverlesspresso-order-table"
+        Type: AWS::DynamoDB::Table
+      Permissions:
+        - Read
+
+  PublishMetricsQueueConnector:
+    Type: AWS::Serverless::Connector
+    Properties:
+      Source:
+        Id: MetricsQueue
+      Destination:
+        Id: PublishMetrics
+      Permissions:
+        - Write
+        - Read
+
+  LambdaFunctionEventSourceMapping:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      BatchSize: 10
+      MaximumBatchingWindowInSeconds: 30
+      Enabled: true
+      EventSourceArn: !GetAtt MetricsQueue.Arn
+      FunctionName: !GetAtt PublishMetrics.Arn
