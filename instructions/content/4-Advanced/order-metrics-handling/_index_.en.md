@@ -6,8 +6,8 @@ weight = 12
 
 ## Overview
 - This section demonstrates the extensibility of event driven architectures. New functional requirements come up all the time in production applications. We can address new requirements for an event driven application by creating new rules for events in the Event Bus. These rules can add new functionality to the application without having any impact to the existing application stack.   
-- This section shows how to batch all order completed events from the OrderManager workflow and route them to an SQS queue. The new rule enables business metric collection for events in your event bus.
-- Using SQS as a target for EventBridge events reduces pressure on downstream systems from spikes in traffic in the event bus.
+- This section shows how to route all order completed events from the OrderManager workflow to an SQS queue. A Lambda function will process the events in batches off of the queue and update the metrics table. The new rule enables business metric collection for events in your event bus.
+- Using SQS as a target for EventBridge events reduces pressure on your downstream systems from spikes in traffic in the event bus.
 
 - ![Workflow Architecture](/images/se-mod4-OrderComplete.png)
 
