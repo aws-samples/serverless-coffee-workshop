@@ -66,7 +66,7 @@ Resources:
                   var params = {
                     ExpressionAttributeValues: {
                       ':pk': "orders",
-                      ':id': orderId.toString(),
+                      ':id': orderId
                     },
                   KeyConditionExpression: 'PK = :pk and SK = :id',
                   TableName: 'serverlesspresso-order-table'
@@ -127,7 +127,7 @@ Resources:
           };
       Description: Publish Event Metrics for Serverlesspresso
       Handler: index.handler
-      MemorySize: 128
+      MemorySize: 512
       Runtime: nodejs16.x
       ReservedConcurrentExecutions: 1
       Timeout: 30
@@ -190,18 +190,18 @@ Resources:
               const drinks = menu.map(item => item.M.drink.S)
               
               // batch size of db batchWrite
-              const batchSize = 25
+              const batchSize = 20
               
               // loop many batches
               for (let i = 1000; i < 1500; i+=batchSize) {
 
               let batch = [];
               // loop a batch
-              for (let b = 1; b < batchSize; b++) {
+              for (let b = 0; b < batchSize; b++) {
                   
                   let uid = String(i + b) // current Iteration
                   let drink = drinks[((Math.floor(Math.random() * drinks.length)))]; // random drink
-                  let order = '"userId":' + uid + ',"drink":"'+ drink + '"' // order payload
+                  let order = `{"userId": ${uid}, "drink": "${drink}"}` // order payload
 
                   batch.push({
                       PutRequest: {
@@ -255,7 +255,7 @@ Resources:
           }
       Description: Load test Orders for Serverlesspresso
       Handler: index.handler
-      MemorySize: 128
+      MemorySize: 512
       Runtime: nodejs16.x
       ReservedConcurrentExecutions: 1
       Timeout: 30 
@@ -295,22 +295,23 @@ Resources:
 
               let batchSize = 10
               
-              for (let i = 0; i < 1500; i+=batchSize) {
+              for (let i = 1000; i < 1500; i+=batchSize) {
                   var entries = []
 
                   for (let j = 0; j < batchSize; j++) {
                       let order = String(i + j)
                       console.log(order);
-
+                      let entryDetail = JSON.stringify(
+                          {"Message":"Barista has cancelled or completed the order",
+                              "orderId": order,
+                              "ORDERSTATE": "Completed",
+                              "userId": order}
+                          )
                       entries.push({
                           "Source": "awsserverlessda.serverlesspresso",
                           "EventBusName": "Serverlesspresso",
                           "DetailType": "OrderManager.OrderCompleted",
-                          "Detail": 
-                              '{"Message":"Barista has cancelled or completed the order",\
-                              "orderId:" "' + order + '",\
-                              "ORDERSTATE": "Completed",\
-                              "userId" "' + order + '"}'
+                          "Detail": entryDetail
                       })
 
                   }
@@ -321,7 +322,8 @@ Resources:
                   };
 
                   try {
-                      await eventbridge.putEvents(params).promise()
+                      const response = await eventbridge.putEvents(params).promise()
+                      console.log(response)
                   } catch (e) {
                       console.log(e)
                       throw new Error(e.message)
@@ -335,7 +337,7 @@ Resources:
           }
       Description: Load test Events for Serverlesspresso
       Handler: index.handler
-      MemorySize: 128
+      MemorySize: 512
       Runtime: nodejs16.x
       ReservedConcurrentExecutions: 1
       Timeout: 30 
