@@ -63,7 +63,7 @@ In this section, you will test the rule that starts the **OrderProcessor** workf
 ### Step-by-step instructions ###
 
 From the AWS EventBridge Console, under *Events*:
-1. Choose **Event busses**.
+1. Choose **Event buses**.
 2. Choose the **Serverlesspresso** event bus
 
 ![Select event bus](../images/se-mod2-newOrder-test1.png)
@@ -99,7 +99,7 @@ This should create an event ID with a confirmation summary:
 
 This starts a new execution in the `OrderProcessor` workflow.
 
-3. From the [AWS Step Functions console](https://console.aws.amazon.com/states/home?#/statemachines) select the *OrderProcessorWorkflow* you created earlier. You will see the most recent execution with the *Status*, *Running*.
+3. From the [AWS Step Functions console](https://console.aws.amazon.com/states/home?#/statemachines), select the *OrderProcessorWorkflow* you created earlier. You will see the most recent execution with the *Status*, *Running*.
 
 ![Execution results](../images/se-mod2-NewOrder2.png)
 
