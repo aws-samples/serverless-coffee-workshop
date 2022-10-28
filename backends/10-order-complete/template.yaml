@@ -54,7 +54,6 @@ Resources:
       InlineCode: |
           const dynamodb = require('aws-sdk/clients/dynamodb');
           const docClient = new dynamodb.DocumentClient();
-
           exports.handler = async (event) => {
               console.log(event)
               const date = new Date().toISOString().slice(0, 10);
@@ -71,7 +70,10 @@ Resources:
                   KeyConditionExpression: 'PK = :pk and SK = :id',
                   TableName: 'serverlesspresso-order-table'
                   };
-              const response = await docClient.query(params).promise();
+                  const response = await docClient.query(params).promise();
+                  if ("MetricPublished" in response["Items"][0]) {
+                      continue
+                  }
                   const orderDetails = JSON.parse(response["Items"][0]["drinkOrder"])
                   var transactParams = {
                   TransactItems: [
@@ -118,6 +120,22 @@ Resources:
                   console.log(e)
                   throw new Error(e.message)
               }
+              let updateParams = {
+                  TableName: 'serverlesspresso-order-table',
+                  Key: { "PK" : 'orders', "SK": orderId },
+                  UpdateExpression: 'set #MP = :x',
+                  ExpressionAttributeNames: {'#MP' : 'MetricPublished'},
+                  ExpressionAttributeValues: {
+                      ':x' : true,
+                  }
+              }
+              try {
+                  await docClient.update(updateParams).promise()
+              }
+              catch(e) {
+                  console.log(e)
+                  throw new Error(e.message)
+              }
               }
               const response = {
                   statusCode: 200,
@@ -152,6 +170,7 @@ Resources:
         Type: AWS::DynamoDB::Table
       Permissions:
         - Read
+        - Write
 
   PublishMetricsQueueConnector:
     Type: AWS::Serverless::Connector
