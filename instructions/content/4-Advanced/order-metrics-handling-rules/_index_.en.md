@@ -3,10 +3,10 @@ title = "Handling EventBridge Events with SQS"
 weight = 13
 +++
 
-## Creating the "OrderCompleted" rule
+## Creating the "WaitingCompletion" rule
 
 ### Step by Step Instructions
-1. Go to the EventBridge console. From the AWS Management Console, select *Services* then select EventBridge  *Application Integration*. **Make sure your region is correct**.
+1. Go to the EventBridge console. From the AWS Management Console, select *Services* then select EventBridge *Application Integration*. **Make sure your region is correct**.
 
 2. Choose **Rules**. Choose **Create rule**.
 3. In Step 1 of the wizard:

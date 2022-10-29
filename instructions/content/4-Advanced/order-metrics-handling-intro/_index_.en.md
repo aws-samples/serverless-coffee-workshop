@@ -19,7 +19,7 @@ weight = 12
 
 ### 1. Launch the AWS CloudFormation template
 
-This workshop can be run inside your own AWS accounts. To enable you to follow the workshop, we need to set up and configure a number of AWS services. We have made provisioning these services as simple as possible.
+This section has its own CloudFormation template that is separate from the core stack. You'll need to follow the steps below to deploy the resources required for this module.
 
 {{% notice info%}}
 

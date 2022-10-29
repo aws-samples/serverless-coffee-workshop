@@ -3,7 +3,7 @@ title = "Handling EventBridge Events with SQS"
 weight = 14
 +++
 
-## Testing the "OrderCompleted" Rule
+## Testing the "OrderManager.WaitingCompletion" Rule
 
 ### Step-by-step instructions
 8. Single Order Test
