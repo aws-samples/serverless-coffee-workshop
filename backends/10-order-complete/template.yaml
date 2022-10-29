@@ -51,100 +51,9 @@ Resources:
   PublishMetrics:
     Type: AWS::Serverless::Function
     Properties: 
-      InlineCode: |
-          const dynamodb = require('aws-sdk/clients/dynamodb');
-          const docClient = new dynamodb.DocumentClient();
-          exports.handler = async (event) => {
-              console.log(event)
-              const date = new Date().toISOString().slice(0, 10);
-              var tableName = "serverlesspresso-metrics-table"
-              for (const record of event.Records) {
-                  const body = JSON.parse(record.body)
-                  const orderId = body["detail"]["orderId"]
-                  console.log(orderId)
-                  var params = {
-                    ExpressionAttributeValues: {
-                      ':pk': "orders",
-                      ':id': orderId
-                    },
-                  KeyConditionExpression: 'PK = :pk and SK = :id',
-                  TableName: 'serverlesspresso-order-table'
-                  };
-                  const response = await docClient.query(params).promise();
-                  if ("MetricPublished" in response["Items"][0]) {
-                      continue
-                  }
-                  const orderDetails = JSON.parse(response["Items"][0]["drinkOrder"])
-                  var transactParams = {
-                  TransactItems: [
-                      {
-                          Update: {
-                              TableName : tableName,
-                              Key:{
-                                  "PK": "Aggregate",
-                                  "SK": `${date}#TotalSales`
-                              },
-                              UpdateExpression: "SET #val = if_not_exists(#val, :initial) + :num",
-                              ExpressionAttributeNames: {
-                                  '#val'   : `val`,
-                              },                        
-                              ExpressionAttributeValues: {
-                                  ":num": 1,
-                                  ":initial": 0,
-                              }
-                          }
-                      },
-                      {
-                          Update: {
-                              TableName : tableName,
-                              Key:{
-                                  "PK": "Aggregate",
-                                  "SK": `${date}#${orderDetails["drink"]}`
-                              },
-                              UpdateExpression: "SET #val = if_not_exists(#val, :initial) + :num",
-                              ExpressionAttributeNames: {
-                                  '#val'   : `val`,
-                              },
-                              ExpressionAttributeValues: {
-                                  ":num": 1,
-                                  ":initial": 0,
-                              }
-                          }
-                      }
-                  ]
-              }
-              try {
-                  await docClient.transactWrite(transactParams).promise()
-              }
-              catch(e) {
-                  console.log(e)
-                  throw new Error(e.message)
-              }
-              let updateParams = {
-                  TableName: 'serverlesspresso-order-table',
-                  Key: { "PK" : 'orders', "SK": orderId },
-                  UpdateExpression: 'set #MP = :x',
-                  ExpressionAttributeNames: {'#MP' : 'MetricPublished'},
-                  ExpressionAttributeValues: {
-                      ':x' : true,
-                  }
-              }
-              try {
-                  await docClient.update(updateParams).promise()
-              }
-              catch(e) {
-                  console.log(e)
-                  throw new Error(e.message)
-              }
-              }
-              const response = {
-                  statusCode: 200,
-                  body: JSON.stringify('Executed Publish Metrics'),
-              };
-              return response;
-          };
+      CodeUri: code/
+      Handler: PublishMetrics.handler
       Description: Publish Event Metrics for Serverlesspresso
-      Handler: index.handler
       MemorySize: 512
       Runtime: nodejs16.x
       ReservedConcurrentExecutions: 1
@@ -158,18 +67,6 @@ Resources:
       Destination:
         Id: MetricsTable
       Permissions:
-        - Write
-
-  PublishMetricsOrdersTableConnector:
-    Type: AWS::Serverless::Connector
-    Properties:
-      Source:
-        Id: PublishMetrics
-      Destination:
-        Arn: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/serverlesspresso-order-table"
-        Type: AWS::DynamoDB::Table
-      Permissions:
-        - Read
         - Write
 
   PublishMetricsQueueConnector:
@@ -191,176 +88,17 @@ Resources:
       Enabled: true
       EventSourceArn: !GetAtt MetricsQueue.Arn
       FunctionName: !GetAtt PublishMetrics.Arn
-            
-  OrderLoadTest:
-    Type: AWS::Serverless::Function
-    Properties: 
-      InlineCode: |
-          const AWS = require('aws-sdk');
-          const db = new AWS.DynamoDB();
-          const dynamodb = require('aws-sdk/clients/dynamodb');
-          const documentClient = new dynamodb.DocumentClient();
-
-          exports.handler = async (event) => {
-              
-              // Get drinks
-              const config = await getConfigTable()
-              const menu = config.Item.value.L
-              const drinks = menu.map(item => item.M.drink.S)
-              
-              // batch size of db batchWrite
-              const batchSize = 20
-              
-              // loop many batches
-              for (let i = 1000; i < 1500; i+=batchSize) {
-
-              let batch = [];
-              // loop a batch
-              for (let b = 0; b < batchSize; b++) {
-                  
-                  let uid = String(i + b) // current Iteration
-                  let drink = drinks[((Math.floor(Math.random() * drinks.length)))]; // random drink
-                  let order = `{"userId": ${uid}, "drink": "${drink}"}` // order payload
-
-                  batch.push({
-                      PutRequest: {
-                          Item: {
-                              "PK": "orders",
-                              "SK": uid,
-                              "drinkOrder": order,  
-                              "ORDERSTATE":  "Completed",
-                              "USERID": uid
-                          }
-                      }
-
-                  });
-                  
-              }
-              
-              let params = {
-                  RequestItems: {
-                      'serverlesspresso-order-table': batch
-                  }
-              };
-              
-              try {
-                  await documentClient.batchWrite(params).promise()
-              }
-              catch(e) {
-                  console.log(e)
-                  throw new Error(e.message)
-              }
-              
-            }
-            const response = {
-                  statusCode: 200,
-                  body: JSON.stringify('Executed Order Load Test'),
-            };
-            return response;
-          }
-
-          // Function to get config table
-          function getConfigTable() {
-              var query = {
-                  TableName: 'serverlesspresso-config-table',
-                  Key: {
-                      'PK': {S: 'menu'}
-                  },
-                  AttributesToGet: [
-                      "value"
-                  ]
-              };
-              return db.getItem(query).promise()
-          }
-      Description: Load test Orders for Serverlesspresso
-      Handler: index.handler
-      MemorySize: 512
-      Runtime: nodejs16.x
-      ReservedConcurrentExecutions: 1
-      Timeout: 30 
       
-  OrderLoadTestConfigTableConnector:
-    Type: AWS::Serverless::Connector
-    Properties:
-      Source:
-        Id: OrderLoadTest
-      Destination:
-        Arn: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/serverlesspresso-config-table"
-        Type: AWS::DynamoDB::Table
-      Permissions:
-        - Read
-        
-  OrderLoadTestOrderTableConnector:
-    Type: AWS::Serverless::Connector
-    Properties:
-      Source:
-        Id: OrderLoadTest
-      Destination:
-        Arn: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/serverlesspresso-order-table"
-        Type: AWS::DynamoDB::Table
-      Permissions:
-        - Write
-
   EventsLoadTest:
     Type: AWS::Serverless::Function
     Properties: 
-      InlineCode: |
-          // Import required AWS SDK clients and commands for Node.js
-          const AWS = require("aws-sdk");
-
-          exports.handler = async (event) => {
-
-              var eventbridge = new AWS.EventBridge({apiVersion: '2015-10-07'})
-
-              let batchSize = 10
-              
-              for (let i = 1000; i < 1500; i+=batchSize) {
-                  var entries = []
-
-                  for (let j = 0; j < batchSize; j++) {
-                      let order = String(i + j)
-                      console.log(order);
-                      let entryDetail = JSON.stringify(
-                          {"Message":"Barista has cancelled or completed the order",
-                              "orderId": order,
-                              "ORDERSTATE": "Completed",
-                              "userId": order}
-                          )
-                      entries.push({
-                          "Source": "awsserverlessda.serverlesspresso",
-                          "EventBusName": "Serverlesspresso",
-                          "DetailType": "OrderManager.OrderCompleted",
-                          "Detail": entryDetail
-                      })
-
-                  }
-
-                  // Set the parameters
-                  let params = {
-                      "Entries": entries
-                  };
-
-                  try {
-                      const response = await eventbridge.putEvents(params).promise()
-                      console.log(response)
-                  } catch (e) {
-                      console.log(e)
-                      throw new Error(e.message)
-                  }
-              }
-              const response = {
-                  statusCode: 200,
-                  body: JSON.stringify('Executed Events Load Test'),
-              };
-              return response;
-          }
+      CodeUri: code/
+      Handler: EventsLoadTest.handler
       Description: Load test Events for Serverlesspresso
-      Handler: index.handler
       MemorySize: 512
       Runtime: nodejs16.x
-      ReservedConcurrentExecutions: 1
-      Timeout: 30 
-      
+      Timeout: 30
+
   EventsLoadTestEventsConnector:
     Type: AWS::Serverless::Connector
     Properties:
