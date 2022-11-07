@@ -35,7 +35,6 @@ weight = 17
 - Open up the `PublishMetrics` Lambda function and navigate to the `Monitoring` tab. Expand the `PublishMetrics` function Invocations graph and select "Maximum" instead of "Sum". You'll see only 1 concurrent execution during the load test. Instead of scaling to process all the messages in the SQS Queue, Reserved Concurrency limited the function to only 1 concurrent execution.
 - Check the `Serverlesspresso_Metrics` dashboard.
    - You’ll see around around 500 total orders were simulated during the load test.
-- ![Invocations Graph](/images/se-mod4-invocations.png)
 ## Takeaways
 - We were able to provide business metrics for the investors by setting up a new rule and microservice without needing to modify the existing application stack. 
 - Use Cloudwatch metrics for custom business metrics and enabling observability into the performance of your event driven application.
