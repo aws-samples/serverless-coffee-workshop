@@ -8,8 +8,8 @@ weight = 17
 ### Step-by-step instructions
 8. Single Order Test
    - Create a new order. 
-   - Check the `serverlesspresso-metrics-table`
-   - ![Workflow Architecture](/images/se-mod4-items.png)
+   - Check the `Serverlesspresso_Metrics` CloudWatch Dashboard
+     - Navigate to CloudWatch in the AWS Console, then select `Dashboards`
    - You’ll see 2 metrics in the Dashboard with populated values: (Similar to screenshot above)
        - Total Orders: 1
        - *Drink* Sold: 1
@@ -20,7 +20,7 @@ weight = 17
   - Before you run the load test, let's look at how Lambda will process messages off the queue.
   - Each invocation of the Lambda function will process the events in batches of up to 10 records or windows of 30 seconds. Reserved Concurrency defines how many concurrent Lambda executions would read messages off the queue, the default is up to 1000 concurrent executions at any given time. By using Reserved Concurrency, we’re saying there should only be 1 concurrent execution of this specific Lambda function. 
   - You can customize the ReservedConcurrentExecutions, BatchSize, and MaximumBatchingWindowInSeconds values to adjust how many records are processed at any given time, our current configuration means we'll process up to 10 records per Lambda execution.
-  - You can check the Cloudwatch dashboard `Serverlesspresso_Metrics` to see the metrics as they’re updated during the load test. You'll see four metrics; counts for each item type and a total order count.
+  - You can check the CloudWatch dashboard `Serverlesspresso_Metrics` to see the metrics as they’re updated during the load test. You'll see four metrics; counts for each item type and a total order count.
   - ![Dashboard](/images/se-mod4-CWDashboard.png)
   - Navigate to the Lambda console and search for the `EventsLoadTest` Lambda function
   - ![Lambda Console Search](/images/se-mod4-LambdaSearch.png)
