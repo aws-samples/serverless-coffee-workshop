@@ -28,7 +28,7 @@ Resources:
               Service:  "events.amazonaws.com"
             Condition:
               ArnEquals:
-                 aws:SourceArn: !Sub "arn:aws:events:${AWS::Region}:${AWS::AccountId}:rule/Serverlesspresso/OrderCompleted"
+                 aws:SourceArn: !Sub "arn:aws:events:${AWS::Region}:${AWS::AccountId}:rule/Serverlesspresso/OrderMetrics-DynamoDB"
 
   MetricsTable:
     Type: AWS::DynamoDB::Table

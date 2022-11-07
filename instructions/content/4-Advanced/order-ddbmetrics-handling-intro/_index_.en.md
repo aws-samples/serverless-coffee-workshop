@@ -9,7 +9,7 @@ weight = 12
 - This section shows how to route all order completed events from the OrderManager workflow to an SQS queue. A Lambda function will process the events in batches off of the queue and update the metrics table. The new rule enables business metric collection for events in your event bus.
 - Using SQS as a target for EventBridge events reduces pressure on your downstream systems from spikes in traffic in the event bus.
 
-- ![Workflow Architecture](/images/se-mod4-OrderComplete.png)
+- ![Workflow Architecture](/images/se-mod4-OrderComplete-DynamoDB.png)
 
 ## Track Order Metrics
 - Let’s say the investors of Serverlesspresso want to understand more details about how many drinks are sold each day. While we could use the orders table to provide some metrics, it’s not so easy to write queries with the existing schema. Instead, we can create a new rule in the Event Bus and a new microservice to provide aggregate metrics for the investors.

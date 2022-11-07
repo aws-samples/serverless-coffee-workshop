@@ -10,7 +10,7 @@ weight = 13
 
 2. Choose **Rules**. Choose **Create rule**.
 3. In Step 1 of the wizard:
-- For the Name, enter *OrderManagerWaitingCompletion*.
+- For the Name, enter *OrderMetrics-DynamoDB*.
 - For *Event bus*, enter `Serverlesspresso`.
 - Choose **Next**.
 ![Rule Configuration](/images/se-mod4-rule.png)
@@ -29,10 +29,10 @@ weight = 13
   - In the Target 1 panel, choose AWS service.
   - In the Select a target dropdown, choose SQS queue
   - In the Queue dropdown, choose the SQS Queue `MetricsQueue`.
-  - This was deployed by the core stack in the setup module. Tip: you can start typing “MetricsQueue” into the field to find the queue.
+  - This was deployed by the core stack in the setup module. Tip: you can start typing MetricsQueue into the field to find the queue.
   - Choose Next.
 ![Target Configuration](/images/se-mod4-target.png)
 
-6. In Step 4 of the wizard, choose **Next**.
+1. In Step 4 of the wizard, choose **Next**.
 
-7. In Step 5 of the wizard, check that the *Define rule detail* panel that the *Event bus* is `Serverlesspresso`. Choose **Create rule**.
+2. In Step 5 of the wizard, check that the *Define rule detail* panel that the *Event bus* is `Serverlesspresso`. Choose **Create rule**.
