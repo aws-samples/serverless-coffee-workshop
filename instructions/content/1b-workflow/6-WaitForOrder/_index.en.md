@@ -64,6 +64,7 @@ In this section, you add an EventBridge PutEvents state that emits an event when
 - For *Comment*, enter `Customer timed out`.
 - For *Errors*, select **States.Timeout**.
 - For *Fallback state*, select **Add new state**.
+- For *ResultPath*, enter `$.cause`.
 - Choose **Close**.
 
 ![Drag UpdateItem to designer](../images/se-mod1-wait4.png)
