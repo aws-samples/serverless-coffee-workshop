@@ -60,7 +60,7 @@ The Serverlesspresso application supports both user and admin accounts. The admi
 
 ![Verification code](/images/se-mod3-backend-display7.png)
 
-3. In a separate browser tab, navigate to the [Cognito console](https://us-east-2.console.aws.amazon.com/cognito/). Choose *ServerlesspressoUserPool*.
+3. In a separate browser tab, navigate to the [Cognito console](https://console.aws.amazon.com/cognito/). Choose *ServerlesspressoUserPool*.
 
 ![Cognito console](/images/s3-mod3-cognito1.png)
 
