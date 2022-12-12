@@ -132,3 +132,6 @@ samconfig.toml
 
 # End of https://www.gitignore.io/api/osx,node,linux,windows
 instructions/public/
+
+# Cloud Formation outputs
+setup/tmp
