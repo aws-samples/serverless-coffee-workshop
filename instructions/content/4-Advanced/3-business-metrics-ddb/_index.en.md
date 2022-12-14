@@ -1,5 +1,5 @@
 +++
-title = "Business metriecs with SQS and DynamoDB "
+title = "Business metrics with SQS and DynamoDB "
 weight = 1
 pre = "<b>A. </b>"
 +++
