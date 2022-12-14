@@ -1,8 +1,8 @@
 +++
-title = "Handling EventBridge Events with SQS"
-weight = 12
+title = "Business metriecs with SQS and DynamoDB "
+weight = 1
+pre = "<b>A. </b>"
 +++
-
 
 ## Overview
 - This section demonstrates the extensibility of event driven architectures. New functional requirements come up all the time in production applications. We can address new requirements for an event driven application by creating new rules for events in the Event Bus. These rules can add new functionality to the application without having any impact to the existing application stack.   
@@ -30,7 +30,7 @@ We will leverage AWS CloudFormation which allows us to codify our infrastructure
 
 | Region | Launch stack |
 | ------ |:------|
-| **US East (N. Virginia)** us-east-1 | {{% button href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?stackName=serverless-workshop&templateURL=https://ee-assets-prod-us-east-1.s3.amazonaws.com/modules/67b03f2bcecc4fafb15053897585b61f/v1/cloudformationvLatest.yml" icon="fas fa-rocket" icon-position="right" colour="#ff0000" %}} Launch {{% /button %}} |
+| **US East (N. Virginia)** us-east-1 | {{% button href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?stackName=serverless-workshop-sqs-ddb&templateURL=https://da-public-assets.s3.amazonaws.com/workshops/coffee-workshop/sqs-module-db/template-sqs-ddb.yaml" icon="fas fa-rocket" icon-position="right" colour="#ff0000" %}} Launch {{% /button %}} |
 
 1. Enter a stack name (or just keep the default name)
 2. **Check** the boxes in the Capabilities section

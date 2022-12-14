@@ -1,5 +1,5 @@
 +++
-title = "Handling EventBridge Events with SQS"
+title = "Creating the Rules"
 weight = 16
 +++
 
