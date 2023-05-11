@@ -18,7 +18,7 @@ It's time to complete a full end-to-end test with the front-end application usin
 
 2. Open the barcode scanner on your smartphone. Some phone models may require the use of a free QR scanner app instead of the default barcode scanner. Scan the QR code on the Display App. If a barcode isn't currently shown because the screen is in a timeout period, wait until the timer counter ends and the barcode reappears.
 
-3. Sign into the app using the account you created in a previous section. 
+3. Sign into the app using the account you created in a previous section.
 
 ![Two web apps side-by-side](/images/se-mod3-frontends-customer4.png)
 
