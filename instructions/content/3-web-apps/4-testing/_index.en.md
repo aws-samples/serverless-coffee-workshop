@@ -18,11 +18,11 @@ It's time to complete a full end-to-end test with the front-end application usin
 
 2. Open the barcode scanner on your smartphone. Some phone models may require the use of a free QR scanner app instead of the default barcode scanner. Scan the QR code on the Display App. If a barcode isn't currently shown because the screen is in a timeout period, wait until the timer counter ends and the barcode reappears.
 
-3. Sign into the app using the account you created in a previous section.
+3. Sign into the app using the account you created in a previous section. 
 
 ![Two web apps side-by-side](/images/se-mod3-frontends-customer4.png)
 
-4. After the token validates, select a drink to order and choose **Order Now**.
+4. After the token validates, select a drink to order and choose **Order Now**. If your app keeps running the configuration every time you scan the QR code, make sure you are not using the "private browsing" configuration for Safari or "incognito" for Chrome on your smartphone.
 
 ![Ordering app menu](/images/se-mod3-testing2.png)
 
