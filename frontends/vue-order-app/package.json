@@ -23,7 +23,7 @@
     "vue-cli-plugin-vuestic-ui": "~1.0.1",
     "vue-router": "^4.0.12",
     "vue3-tel-input": "^1.0.4",
-    "vuestic-ui": "^1.1.1",
+    "vuestic-ui": "1.1.1",
     "vuex": "^4.0.2",
     "webpack": "^4.46.0"
   },
