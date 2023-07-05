@@ -14,7 +14,7 @@ This frontend has already been deployed and is presented as a hosted UI at https
 - The settings you use are not visible to anyone else visiting the same URL.
 
 *Source code for this application:*
-* [The Display App ](#)
+* [The Display App ](https://github.com/aws-samples/serverless-coffee-workshop/tree/main/frontends/vue-display-app)
 
 ## Setting up the Display App
 

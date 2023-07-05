@@ -14,7 +14,7 @@ This frontend has already been deployed and is presented as a hosted UI at https
 - The settings you use are not visible to anyone else visiting the same URL.
 
 *Source code for this application:*
-* [The Customer App ](#)
+* [The Customer App ](https://github.com/aws-samples/serverless-coffee-workshop/tree/main/frontends/vue-order-app)
 
 ## Setting up the Customer App
 
