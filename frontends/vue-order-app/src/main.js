@@ -27,12 +27,12 @@ Amplify.configure({
     // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
     // identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
     // identityPoolId: 'us-west-2:5b74593f-3626-47aa-a04e-6761adb4c772',
-    region: 'us-west-2',
-    identityPoolRegion: 'us-west-2',
+    region: 'ap-southeast-1',
+    identityPoolRegion: 'ap-southeast-1',
     // OPTIONAL - Amazon Cognito User Pool ID
-    userPoolId: 'us-west-2_1fKeOVEyD',
+    userPoolId: 'ap-southeast-1_gLya51YIM',
     // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-    userPoolWebClientId: '1e02u58o3tiu5im3u6nbc4136u',
+    userPoolWebClientId: '7847gtddsn22ugb0mq39unaprt',
     // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
     mandatorySignIn: false,
     // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
@@ -86,19 +86,19 @@ app.use(VuesticPlugin,{
 
 // ** Websocket connection **
 //  PoolId: Retrieve this with the CLI command: aws cognito-identity list-identity-pools --max-results 10 --region <<REGION>>
-app.config.globalProperties.$poolId = 'us-west-2:f7f97189-d1cb-4af6-a19c-5c3169049cc8' // 'YourCognitoIdentityPoolId'
+app.config.globalProperties.$poolId = 'ap-southeast-1:01c4c338-5d62-4be8-9a6c-7e750390ff97' // 'YourCognitoIdentityPoolId'
 //  IoTendpoint: Retrieve this with the CLI command: aws iot describe-endpoint --endpoint-type iot:Data-ATS --region us-west-2
-app.config.globalProperties.$host = 'anput1xffmgcz-ats.iot.us-west-2.amazonaws.com' // 'YourAwsIoTEndpoint', e.g. 'prefix.iot.us-east-1.amazonaws.com'
-app.config.globalProperties.$region = 'us-west-2'      
+app.config.globalProperties.$host = 'a3tw82l7ucghei-ats.iot.ap-southeast-1.amazonaws.com' // 'YourAwsIoTEndpoint', e.g. 'prefix.iot.us-east-1.amazonaws.com'
+app.config.globalProperties.$region = 'ap-southeast-1'      
 
 //APIGW OrderManager Service**
-app.config.globalProperties.$orderManagerEndpoint='https://r1yczep24g.execute-api.us-west-2.amazonaws.com'
+app.config.globalProperties.$orderManagerEndpoint='https://en0zvine6g.execute-api.ap-southeast-1.amazonaws.com/Prod'
 
 // **APIGW  Validator Service **
-app.config.globalProperties.$APIGWEndpointValidatorService = 'https://2sprfaybr2.execute-api.us-west-2.amazonaws.com'
+app.config.globalProperties.$APIGWEndpointValidatorService = 'https://z5u4l3kzib.execute-api.ap-southeast-1.amazonaws.com/Prod/'
 
 // **APIGW config Service **
-app.config.globalProperties.$APIGWEndpointConfigService = 'https://5x8ngrfi2i.execute-api.us-west-2.amazonaws.com'
+app.config.globalProperties.$APIGWEndpointConfigService = 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/'
 
 // ** readonly config store endpoint **
 app.config.globalProperties.$ConfigEndpoint = 'https://d1ne659jn8mkns.cloudfront.net/config'
