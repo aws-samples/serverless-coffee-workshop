@@ -64,14 +64,14 @@ if (localStorage.UIstate) {
   console.log('Mounted - Local storage: ', UIstate)
 
   // Hydrating state from local cache
-  app.config.globalProperties.$APIurl = UIstate.APIurl || ''
-  app.config.globalProperties.$region = UIstate.region || ''
+  app.config.globalProperties.$APIurl = UIstate.APIurl || 'https://en0zvine6g.execute-api.ap-southeast-1.amazonaws.com/Prod'
+  app.config.globalProperties.$region = UIstate.region || 'ap-southeast-1'
 
-  app.config.globalProperties.$ordersAPIurl = UIstate.ordersAPIurl || ''
-  app.config.globalProperties.$APIconfigURL = UIstate.APIconfigURL || ''
-  app.config.globalProperties.$poolId = UIstate.$poolId || ''
-  app.config.globalProperties.$ConfigEndpoint = UIstate.ConfigEndpoint || '',
-  app.config.globalProperties.$host = UIstate.host || ''
+  app.config.globalProperties.$ordersAPIurl = UIstate.ordersAPIurl || 'https://en0zvine6g.execute-api.ap-southeast-1.amazonaws.com/Prod'
+  app.config.globalProperties.$APIconfigURL = UIstate.APIconfigURL || 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/config'
+  app.config.globalProperties.$poolId = UIstate.$poolId || 'ap-southeast-1:01c4c338-5d62-4be8-9a6c-7e750390ff97'
+  app.config.globalProperties.$ConfigEndpoint = UIstate.ConfigEndpoint || 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/config',
+  app.config.globalProperties.$host = UIstate.host || 'a3tw82l7ucghei-ats.iot.ap-southeast-1.amazonaws.com'
 }
 
 // Are global vars initialized?

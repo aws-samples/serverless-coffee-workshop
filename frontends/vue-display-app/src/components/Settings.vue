@@ -93,7 +93,7 @@ export default {
       this.region = UIstate.region || '',
       this.ordersAPIurl = UIstate.ordersAPIurl || '',
       this.poolId = UIstate.poolId || '',
-      this.APIconfigURL = UIstate.APIconfigURL || '',
+      this.APIconfigURL = UIstate.APIconfigURL || 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/',
       this.ConfigEndpoint = UIstate.ConfigEndpoint || '',
       this.host = UIstate.host || ''
     }
