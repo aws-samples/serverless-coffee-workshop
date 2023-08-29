@@ -101,7 +101,7 @@ app.config.globalProperties.$APIGWEndpointValidatorService = 'https://z5u4l3kzib
 app.config.globalProperties.$APIGWEndpointConfigService = 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/'
 
 // ** readonly config store endpoint **
-app.config.globalProperties.$ConfigEndpoint = 'https://d1ne659jn8mkns.cloudfront.net/config'
+app.config.globalProperties.$ConfigEndpoint = 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/config'
 
 // ** readonly config store endpoint **
 app.config.globalProperties.$journeyServiceURL = 'https://d1mt6zclpinn6p.cloudfront.net/' 

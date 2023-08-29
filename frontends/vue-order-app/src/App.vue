@@ -297,7 +297,7 @@ export default {
 
             CustomerStatus.MaxOrdersReached = false
 
-            if(list.result.length){
+            if(Array.isArray(list.result) && list.result.length){
               let listres = list.result
               let list2 = listres.sort((a, b) => (a.TS > b.TS) ? 1 : -1)
               console.log('list2',list2)
@@ -335,7 +335,7 @@ export default {
               const jwtToken = session.getAccessToken().jwtToken
               var config = {
                   method: 'post',
-                  url: 'https://2sprfaybr2.execute-api.us-west-2.amazonaws.com/qr-code?token='+token,
+                  url: 'https://z5u4l3kzib.execute-api.ap-southeast-1.amazonaws.com/Prod/qr-code?token='+token,
                   headers: {
                       'Authorization': 'Bearer '+jwtToken
                   }
