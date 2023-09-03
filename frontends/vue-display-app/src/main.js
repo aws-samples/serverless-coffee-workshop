@@ -64,43 +64,63 @@ if (localStorage.UIstate) {
   console.log('Mounted - Local storage: ', UIstate)
 
   // Hydrating state from local cache
-  app.config.globalProperties.$APIurl = UIstate.APIurl || 'https://en0zvine6g.execute-api.ap-southeast-1.amazonaws.com/Prod'
-  app.config.globalProperties.$region = UIstate.region || 'ap-southeast-1'
+  app.config.globalProperties.$APIurl = 'https://en0zvine6g.execute-api.ap-southeast-1.amazonaws.com/Prod'
+  app.config.globalProperties.$region = 'ap-southeast-1'
 
-  app.config.globalProperties.$ordersAPIurl = UIstate.ordersAPIurl || 'https://en0zvine6g.execute-api.ap-southeast-1.amazonaws.com/Prod'
-  app.config.globalProperties.$APIconfigURL = UIstate.APIconfigURL || 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/config'
-  app.config.globalProperties.$poolId = UIstate.$poolId || 'ap-southeast-1:01c4c338-5d62-4be8-9a6c-7e750390ff97'
-  app.config.globalProperties.$ConfigEndpoint = UIstate.ConfigEndpoint || 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/config',
-  app.config.globalProperties.$host = UIstate.host || 'a3tw82l7ucghei-ats.iot.ap-southeast-1.amazonaws.com'
+  app.config.globalProperties.$ordersAPIurl = 'https://en0zvine6g.execute-api.ap-southeast-1.amazonaws.com/Prod/'
+  app.config.globalProperties.$APIconfigURL = 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/'
+  app.config.globalProperties.$poolId = 'ap-southeast-1_WpLE8AlIr'
+  app.config.globalProperties.$ConfigEndpoint = 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/config',
+  app.config.globalProperties.$host = '446dboc3mqtkarht692s56e3oi'
 }
 
-// Are global vars initialized?
-app.config.globalProperties.$init = false
+// // Are global vars initialized?
+// app.config.globalProperties.$init = false
 
-// Only init if settings are provided
-if (app.config.globalProperties.$APIurl === '' ||
-    app.config.globalProperties.$region === '' ||
-    app.config.globalProperties.$ordersAPIurl === '' ||
-    app.config.globalProperties.$c === '' ||
-    app.config.globalProperties.$poolId === '' ||
-    app.config.globalProperties.$ConfigEndpoint === '' ||
-    app.config.globalProperties.$host === '') {
+// // Only init if settings are provided
+// if (app.config.globalProperties.$APIurl === '' ||
+//     app.config.globalProperties.$region === '' ||
+//     app.config.globalProperties.$ordersAPIurl === '' ||
+//     app.config.globalProperties.$APIconfigURL === '' ||
+//     app.config.globalProperties.$poolId === '' ||
+//     app.config.globalProperties.$ConfigEndpoint === '' ||
+//     app.config.globalProperties.$host === '') {
 
-    try {
-      Amplify.configure({
-        Auth: {
-          region: this.$region,
-          identityPoolRegion: this.$region,
-          userPoolId: this.$poolId,
-          userPoolWebClientId: this.$host,
-          mandatorySignIn: false,
-          authenticationFlowType: 'CUSTOM_AUTH',
-        }
-      })
-    } catch (err) {
-      console.error('Error: ', err)
-    }
-    app.config.globalProperties.$init = true
- }
+//     try {
+//       Amplify.configure({
+//         Auth: {
+//           region: this.$region,
+//           identityPoolRegion: this.$region,
+//           userPoolId: this.$poolId,
+//           userPoolWebClientId: this.$host,
+//           mandatorySignIn: false,
+//           authenticationFlowType: 'CUSTOM_AUTH',
+//         }
+//       })
+//     } catch (err) {
+//       console.error('Error: ', err)
+//     }
+//     app.config.globalProperties.$init = true
+//  }
+
+ Amplify.configure({
+  Auth: {
+    // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
+    // identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
+    // identityPoolId: 'us-west-2:5b74593f-3626-47aa-a04e-6761adb4c772',
+    region: 'ap-southeast-1',
+    identityPoolRegion: 'ap-southeast-1',
+    // OPTIONAL - Amazon Cognito User Pool ID
+    userPoolId: 'ap-southeast-1_WpLE8AlIr',
+    // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+    userPoolWebClientId: '446dboc3mqtkarht692s56e3oi',
+    // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
+    mandatorySignIn: false,
+    // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
+    authenticationFlowType: 'CUSTOM_AUTH',
+  }
+})
+
+app.config.globalProperties.$init = true
 
 app.mount('#app')

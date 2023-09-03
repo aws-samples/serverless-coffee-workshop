@@ -153,7 +153,7 @@ export default {
       }
 
       try {
-        const { data } = await axios.get(`${this.$APIurl}/qr-code`, { headers: { Authorization: 'Bearer ' + jwtToken }})
+        const { data } = await axios.get('https://z5u4l3kzib.execute-api.ap-southeast-1.amazonaws.com/Prod/qr-code', { headers: { Authorization: 'Bearer ' + jwtToken }})
         console.log(data)
 
         this.end_ts = data.bucket.end_ts

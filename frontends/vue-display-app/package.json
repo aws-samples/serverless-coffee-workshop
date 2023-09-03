@@ -8,9 +8,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@aws-amplify/ui-components": "^1.9.2",
+    "@aws-amplify/ui-components": "^1.7.1",
     "apexcharts": "^3.29.0",
-    "aws-amplify": "^4.3.4",
+    "aws-amplify": "^4.2.2",
     "aws-iot-device-sdk": "^2.2.11",
     "aws-sdk": "^2.1019.0",
     "axios": "^0.24.0",
