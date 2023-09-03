@@ -48,7 +48,7 @@ const REFRESH_TIME_INTERVAL_MS = 300000
 
 // Timer interval to calculate remaining period
 const REFRESH_MS = 1000
-const QR_PREFIX = 'https://workshop-order.serverlesscoffee.com?token='
+const QR_PREFIX = 'https://main.d40jtd1j0gedq.amplifyapp.com?token='
 
 export default {
   name: 'QRcode',
