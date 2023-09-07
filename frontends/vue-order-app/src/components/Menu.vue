@@ -15,7 +15,7 @@
                         <a :class="{highlight:index == selected}" @click='add(item), selected = index'>
                             <va-card :bordered="true"  outlined>
                                 <va-card-title>{{item.drink}}</va-card-title>
-                                <va-card-content><img width="50" :src="`https://assets.serverlesscoffee.com/images/${item.icon}.svg` "></va-card-content>
+                                <va-card-content><img width="50" :src="`https://assets.serverlesscoffee.com/images/${menuItems[0].value.L[0].M.icon.S}.svg` "></va-card-content>
                              </va-card>
                         </a>
                     </div>
