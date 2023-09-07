@@ -100,9 +100,9 @@
 
 /* eslint-disable */
 
-const shortbread = AWSCShortbread({
-    domain: "workshop-order.serverlesscoffee.com"
-  });
+// const shortbread = AWSCShortbread({
+//     domain: "workshop-order.serverlesscoffee.com"
+//   });
 
 
 import ReachedLimit from '@/components/LimitReached'
@@ -187,7 +187,7 @@ export default {
   },
   async mounted(){
  // Shows GDPR cookie consent on first load (only if visitor is in affected geography)
-     shortbread.checkForCookieConsent();
+    //  shortbread.checkForCookieConsent();
 
     let that = this
 
@@ -239,9 +239,9 @@ export default {
    methods:{
 
 
-     showCookie () {
-        shortbread.customizeCookies();
-      },
+    //  showCookie () {
+    //     shortbread.customizeCookies();
+    //   },
 
     async mounter(){
 
