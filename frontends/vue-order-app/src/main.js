@@ -98,7 +98,7 @@ app.config.globalProperties.$orderManagerEndpoint='https://en0zvine6g.execute-ap
 app.config.globalProperties.$APIGWEndpointValidatorService = 'https://z5u4l3kzib.execute-api.ap-southeast-1.amazonaws.com/Prod/'
 
 // **APIGW config Service **
-app.config.globalProperties.$APIGWEndpointConfigService = 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/'
+app.config.globalProperties.$APIGWEndpointConfigService = 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/config'
 
 // ** readonly config store endpoint **
 app.config.globalProperties.$ConfigEndpoint = 'https://4rkb07gzf1.execute-api.ap-southeast-1.amazonaws.com/Prod/config'
