@@ -7,7 +7,7 @@
       <template #center>
         <va-navbar-item>
           <div v-if="authState === 'signedin' && user">
-
+            
           </div>
         </va-navbar-item>
       </template>
@@ -411,7 +411,7 @@ export default {
                   this.storeOpen = item.storeOpen
                 }
               })
-              //this.menu = data.filter((item) => item.topic === "menu")[0]
+              this.menu = data.filter((item) => item.topic === "menu")[0]
 
             } catch (err) {
               console.log("Cannot load config: ", err)
