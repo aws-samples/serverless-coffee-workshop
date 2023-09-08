@@ -375,7 +375,7 @@ export default {
           },
 
           onProcessOrder(basket){
-            console.log(basket)
+            console.log('On Process Order send to basket',basket)
             this.order.orderNumber = ''
             this.order.status='waiting'
             this.displayManager='ordered'

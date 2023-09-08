@@ -81,12 +81,17 @@ import Auth from '@aws-amplify/auth'
             const jwtToken = session.getAccessToken().jwtToken
             const that=this
 
+            console.log('user detail ',that.CurrentUser)
+            console.log('order detail ',that.CurrentOrder)
+
               var data = {
                       "userId":that.CurrentUser.username,
                       "drink":that.CurrentOrder.drink,
                       "modifiers": that.CurrentOrder.extras,
                       "icon": that.CurrentOrder.icon
                   }
+
+              console.log("send order >>> ",data)
 
               var config = {
                 method: 'PUT',
