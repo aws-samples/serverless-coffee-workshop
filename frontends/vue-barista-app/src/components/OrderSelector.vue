@@ -246,20 +246,20 @@ export default {
       try {
         // Open orders
         const open = await axios.get(`${this.$APIurl}/orders?state=CREATED`, { headers: { Authorization: 'Bearer ' + jwtToken }})
-        console.log('Open orders:', open)
+        console.log('Open orders:', open.data)
 
-        open.data.result.map((order) => {
+        open.data.forEach((order) => {
           let newOrder = {}
           if (order.orderNumber) {
             newOrder = {
-              orderId: order.SK,
+              orderId: order.SK.S,
               baristaUserId: order.baristaUserId,
               orderNumber: order.orderNumber,
               customerName: '',
               robot: order.robot,
-              orderItemName: order.drinkOrder?.drink,
-              modifiers: order.drinkOrder?.modifiers,
-              startTime: order.TS,
+              orderItemName: order.drinkOrder?.S.drink,
+              modifiers: order.drinkOrder?.S.modifiers,
+              startTime: order.TS.N,
               state: 'preview',
               age: 0
             }
@@ -279,17 +279,17 @@ export default {
         const completed = await axios.get(`${this.$APIurl}/orders?state=COMPLETED&maxItems=10`, { headers: { Authorization: 'Bearer ' + jwtToken }})
         console.log('Completed orders:', completed)
 
-        completed.data.result.map((order) => {
+        completed.data.forEach((order) => {
           // console.log((Date.now() - order.TS) / 1000, MAX_AGE_LOADED_ORDERS)
           if ((Date.now() - order.TS) / 1000 < MAX_AGE_LOADED_ORDERS) {
             this.orders.push({
-              orderId: order.SK,
+              orderId: order.SK.S,
               orderNumber: order.orderNumber,
               customerName: '',
               robot: order.robot,
-              orderItemName: order.drinkOrder?.drink,
-              modifiers: order.drinkOrder?.modifiers,
-              startTime: order.TS,
+              orderItemName: order.drinkOrder?.S.drink,
+              modifiers: order.drinkOrder?.S.modifiers,
+              startTime: order.TS.N,
               timeInProd: 0,
               state: 'pickup',
               age: 0
