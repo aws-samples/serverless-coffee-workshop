@@ -80,12 +80,15 @@ import Auth from '@aws-amplify/auth'
             const session = await Auth.currentSession()
             const jwtToken = session.getAccessToken().jwtToken
             const that=this
+            const username = session.getAccessToken().payload.username
 
             console.log('user detail ',that.CurrentUser)
             console.log('order detail ',that.CurrentOrder)
+            console.log('session detail ',session.getAccessToken().payload.username)
+            console.log('jwtToken detail ',jwtToken)
 
               var data = {
-                      "userId":that.CurrentUser.username,
+                      "userId":username,
                       "drink":that.CurrentOrder.drink,
                       "modifiers": that.CurrentOrder.extras,
                       "icon": that.CurrentOrder.icon
