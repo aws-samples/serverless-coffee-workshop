@@ -122,16 +122,16 @@ export default {
         })
         console.log("orders", data)
 
-        data.result.map((order) => {
-          console.log("Order:", order);
+        data.forEach((order) => {
+          let drinkOrder = JSON.parse(order.drinkOrder?.S)
           this.orders.push({
-            orderId: order.SK,
-            orderNumber: order.orderNumber,
+            orderId: order.SK.S,
+            orderNumber: order.orderNumber.S,
             customerName: "Name",
-            orderItemName: order.drinkOrder.drink,
-            icon: order.drinkOrder.icon,
-            modifiers: order.drinkOrder.modifiers,
-            startTime: order.TS, //Date.now() - 10000,
+            orderItemName: drinkOrder.drink,
+            icon: drinkOrder.icon,
+            modifiers: drinkOrder.modifiers,
+            startTime: order.TS.N, //Date.now() - 10000,
             state: "preview",
             age: 0
           })
