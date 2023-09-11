@@ -12,6 +12,7 @@
                 :value="phone"
                 class="phone"
                 style="margin: 20px;"
+                @input="inputPhone"
                 @validate="validatePhone">
               </vue-tel-input>
             </div>
@@ -112,7 +113,11 @@ export default {
     validatePhone (info) {
       console.log('validatePhone: ', info)
       this.isValid = info.valid
-      this.phone = info.number
+    },
+    inputPhone (_, phoneObject) {
+      if (phoneObject && phoneObject.number && this.isValid) {
+        this.phone = phoneObject?.number
+      }
     },
     resetForm () {
       this.phone = ''
