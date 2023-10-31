@@ -2,7 +2,7 @@
   <div :key="componentKey">
     <va-navbar color="#000000" class="mb-2">
       <template #left>
-        <va-navbar-item><img class="logo"  src="https://assets.serverlesscoffee.com/images/se-logo.png"></va-navbar-item>
+        <!-- <va-navbar-item><img class="logo"  src="https://assets.serverlesscoffee.com/images/se-logo.png"></va-navbar-item> -->
       </template>
       <template #center>
         <va-navbar-item>
