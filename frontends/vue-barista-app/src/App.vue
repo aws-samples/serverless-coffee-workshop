@@ -80,9 +80,9 @@ const ROBOT_INTERVAL_MS = 30000
 export default {
   name: 'App',
   components: {
+    Printing,
     IoT,
     OrderSelector,
-    Printing,
     Authentication
   },
   data() {
