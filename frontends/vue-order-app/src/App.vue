@@ -2,7 +2,7 @@
   <div :key="componentKey">
     <va-navbar color="#000000" class="mb-2">
       <template #left>
-         <va-navbar-item><img class="logo"  src="https://dltccoffeeimages.s3.amazonaws.com/Government_of_Gauteng_logo.svg.png"></va-navbar-item> 
+         <va-navbar-item><img class="logo"  src="https://dltccoffeeimages.s3.amazonaws.com/Gauteng+transport.jpeg"></va-navbar-item> 
       </template>
       <template #center>
         <va-navbar-item>
