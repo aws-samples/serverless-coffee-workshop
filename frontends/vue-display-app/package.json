@@ -13,7 +13,7 @@
     "aws-amplify": "^4.3.4",
     "aws-iot-device-sdk": "^2.2.11",
     "aws-sdk": "^2.1019.0",
-    "axios": "^0.24.0",
+    "axios": ">=1.6.0",
     "core-js": "^3.19.0",
     "dayjs": "^1.10.7",
     "lottie-vuejs": "^0.4.0",
