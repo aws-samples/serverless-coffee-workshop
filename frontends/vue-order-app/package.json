@@ -14,7 +14,7 @@
     "aws-amplify-vue": "^2.1.5",
     "aws-iot-device-sdk": "^2.2.11",
     "aws-sdk": "^2.961.0",
-    "axios": "^0.21.1",
+    "axios": ">=1.6.0",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.7",
     "lottie-web-vue": "^1.1.1",
