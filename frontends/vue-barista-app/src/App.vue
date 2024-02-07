@@ -55,7 +55,7 @@
       <OrderSelector />
     </div>
     <IoT />
-    <Printing />
+    <!-- <Printing /> -->
   </div>
 </template>
 
@@ -68,7 +68,8 @@
 
 import IoT from '@/components/IoT'
 import OrderSelector from '@/components/OrderSelector'
-import Printing from '@/components/Printing'
+//import Printing from '@/components/Printing'
+// import Printing from './components/Printing'
 import Authentication from '@/components/Auth'
 
 import { Auth } from 'aws-amplify'
@@ -80,9 +81,9 @@ const ROBOT_INTERVAL_MS = 30000
 export default {
   name: 'App',
   components: {
+    // Printing,
     IoT,
     OrderSelector,
-    Printing,
     Authentication
   },
   data() {
