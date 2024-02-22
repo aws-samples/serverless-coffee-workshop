@@ -86,7 +86,7 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: GetIoTEndpoint.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       CodeUri: ../backends/0-core/code/GetIoTEndpoint
       MemorySize: 128
       Timeout: 3
@@ -277,7 +277,7 @@ Resources:
     Properties:
       CodeUri: ../backends/6-publisher-service/code/
       Handler: publishToIOT.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 3
       Environment:
         Variables:
@@ -310,7 +310,7 @@ Resources:
     Properties:
       CodeUri: ../backends/6-publisher-service/code/
       Handler: publishToIOTuserTopic.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 3
       Environment:
         Variables:
@@ -349,7 +349,7 @@ Resources:
     Properties:
       CodeUri: ../backends/6-publisher-service/code/
       Handler: publishToIOT.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 3
       Environment:
         Variables:
@@ -405,7 +405,7 @@ Resources:
     Properties:
       CodeUri: ../backends/2-config-service/code
       Handler: configChanged.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 15
       MemorySize: 128
       Environment:
@@ -488,7 +488,7 @@ Resources:
     Properties:
       CodeUri: ../backends/9-validator/code
       Handler: getCode.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 15
       MemorySize: 128
       Environment:
@@ -520,7 +520,7 @@ Resources:
     Properties:
       CodeUri: ../backends/9-validator/code
       Handler: verifyCode.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 10
       MemorySize: 128
       Environment:
@@ -593,7 +593,7 @@ Resources:
     Properties:
       CodeUri: initDB
       Handler: app.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 15
       MemorySize: 128
       Environment:
@@ -634,7 +634,7 @@ Resources:
     Properties:
       CodeUri: ../backends/5-order-manager/functions/newOrder
       Handler: app.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 15
       MemorySize: 128
       Environment:
@@ -648,7 +648,7 @@ Resources:
     Properties:
       CodeUri: ../backends/5-order-manager/functions/sanitize
       Handler: app.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 20
       MemorySize: 128
 
@@ -657,7 +657,7 @@ Resources:
     Properties:
       CodeUri: ../backends/5-order-manager/functions/getById
       Handler: app.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 15
       MemorySize: 128
 
@@ -666,7 +666,7 @@ Resources:
     Properties:
       CodeUri: ../backends/5-order-manager/functions/workflowStarted
       Handler: app.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 15
       MemorySize: 128
       Environment:
@@ -681,7 +681,7 @@ Resources:
     Properties:
       CodeUri: ../backends/5-order-manager/functions/waitingCompletion
       Handler: app.handler
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Timeout: 15
       MemorySize: 128
       Environment:
