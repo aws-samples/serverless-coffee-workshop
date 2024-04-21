@@ -25,7 +25,7 @@ Most of front end configurations have already been entered for you, you must loa
 1. From the AWS Management Console, search for "Cloud Formation", then choose "Cloud Formation" from the list of results.
 ![Settings page](/images/se-mod3-backend-display-setup-1.png)
 
-2. From the List of Stacks, select the core stack it should be named something like **mod-67b03f2bcecc4faf**. 
+2. From the List of Stacks, select the stack that should be named something like **workshop**. 
 
 3.Choose the **Outputs** tab.
 
