@@ -20,7 +20,7 @@ We will leverage AWS CloudFormation which allows us to codify our infrastructure
 
 | Region | Launch stack |
 | ------ |:------|
-| **US East (N. Virginia)** us-east-1 | {{% button href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?stackName=serverless-workshop&templateURL=https://ee-assets-prod-us-east-1.s3.amazonaws.com/modules/67b03f2bcecc4fafb15053897585b61f/v1/cloudformationvLatest.yml" icon="fas fa-rocket" icon-position="right" colour="#ff0000" %}} Launch {{% /button %}} |
+| **US East (N. Virginia)** us-east-1 | {{% button href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?stackName=serverless-workshop&templateURL=https://ws-assets-prod-iad-r-iad-ed304a55c2ca1aee.s3.us-east-1.amazonaws.com/28e7066a-b0bb-42ad-a0e9-8e8eeeb51133/workshop-self-service.yaml" icon="fas fa-rocket" icon-position="right" colour="#ff0000" %}} Launch {{% /button %}} |
 
 
 
