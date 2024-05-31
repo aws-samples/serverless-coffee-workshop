@@ -19,7 +19,7 @@ In the following sections, you will fill in the missing pieces in the diagram ab
 
 [![See Serverlesspresso](/images/se-setup-overview5.png)](https://youtu.be/M6lPZCRCsyA)
 
-* The *OrderProcessor* microservice - an [AWS Step Functions](https://aws.amazon.com/stepfunctions) Workflow, that orchestrates each customer order from start to completion
+* The *OrderProcessor* microservice - an [AWS Step Functions](https://aws.amazon.com/step-functions) Workflow, that orchestrates each customer order from start to completion
 * The event routing logic routes events to the correct downstream service (consumer).
 
 Once you have built the back-end resources needed, you will update the front-end application configuration to query the API Gateway endpoint and display the information about all the current menu and order status.
