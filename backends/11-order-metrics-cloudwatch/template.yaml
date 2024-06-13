@@ -39,7 +39,7 @@ Resources:
       Policies:
         - CloudWatchPutMetricPolicy: {}
       MemorySize: 512
-      Runtime: nodejs16.x
+      Runtime: nodejs20.x
       ReservedConcurrentExecutions: 1
       Timeout: 30
 
@@ -70,7 +70,7 @@ Resources:
       Handler: EventsLoadTest.handler
       Description: Load test Events for Serverlesspresso
       MemorySize: 512
-      Runtime: nodejs16.x
+      Runtime: nodejs20.x
       Timeout: 30
 
   EventsLoadTestEventsConnector:

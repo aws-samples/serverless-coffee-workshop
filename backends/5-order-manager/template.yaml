@@ -36,7 +36,7 @@ Parameters:
 Globals:
   Function:
     Timeout: 10
-    Runtime: nodejs16.x
+    Runtime: nodejs20.x
     MemorySize: 256
     Environment:
       Variables:
@@ -343,7 +343,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: robot/
-      Runtime: nodejs16.x
+      Runtime: nodejs20.x
       Handler: sendOrders.handler
       Timeout: 30
       Environment:

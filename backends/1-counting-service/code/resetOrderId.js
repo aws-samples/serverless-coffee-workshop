@@ -2,9 +2,10 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION })
-const documentClient = new AWS.DynamoDB.DocumentClient()
+const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
+
+const documentClient = DynamoDBDocument.from(new DynamoDB())
 
 // Reset order ID counter
 exports.handler = async (event) => {
@@ -19,5 +20,5 @@ exports.handler = async (event) => {
     ExpressionAttributeValues:{
       ":val": 0
     }
-  }).promise()
+  })
 }

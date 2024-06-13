@@ -2,13 +2,16 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-'use strict'
+'use strict';
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION })
+const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
+const { EventBridge } = require("@aws-sdk/client-eventbridge");
 
-const documentClient = new AWS.DynamoDB.DocumentClient()
-const eventbridge = new AWS.EventBridge()
+const documentClient = DynamoDBDocument.from(new DynamoDB())
+const eventbridge = new EventBridge({
+  region: process.env.AWS_REGION,
+})
 
 // Returns details of a Place ID where the app has user-generated content.
 exports.handler = async (event) => {
@@ -35,7 +38,7 @@ exports.handler = async (event) => {
   }
 
   console.log(params)
-  const result = await documentClient.update(params).promise()
+  const result = await documentClient.update(params)
   console.log(result)
 
   // Publish event to EventBridge
@@ -61,6 +64,6 @@ exports.handler = async (event) => {
   }
 
   console.log('publishEvent: ', ebParams)
-  const response = await eventbridge.putEvents(ebParams).promise()
+  const response = await eventbridge.putEvents(ebParams)
   console.log('EventBridge putEvents:', response)
 }

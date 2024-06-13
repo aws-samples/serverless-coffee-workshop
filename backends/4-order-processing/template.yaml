@@ -199,7 +199,7 @@ Resources:
     Properties:
       CodeUri: functions/resumeWF/
       Handler: app.handler
-      Runtime: nodejs16.x
+      Runtime: nodejs20.x
       Events:
         Trigger:
           Type: EventBridgeRule

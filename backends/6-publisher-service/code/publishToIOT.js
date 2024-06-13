@@ -2,9 +2,12 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-const AWS = require('aws-sdk')
-AWS.config.update({region: process.env.AWS_REGION})
-const iotdata = new AWS.IotData({ endpoint: process.env.IOT_DATA_ENDPOINT })
+const { IoTDataPlane } = require('@aws-sdk/client-iot-data-plane');
+
+const iotdata = new IoTDataPlane({
+  endpoint: "https://" + process.env.IOT_DATA_ENDPOINT,
+  region: process.env.AWS_REGION
+})
 
 // Publishes the message to the IoT topic
 const iotPublish = async function (topic, event) {
@@ -18,7 +21,7 @@ const iotPublish = async function (topic, event) {
       })
     }
     console.log('Params: ', params)
-    const result = await iotdata.publish(params).promise()
+    const result = await iotdata.publish(params)
     console.log('iotPublish success: ', topic, process.env.IOT_DATA_ENDPOINT, result)
   } catch (err) {
     console.error('iotPublish error:', err)

@@ -1,6 +1,9 @@
 // Import required AWS SDK clients and commands for Node.js
-const AWS = require("aws-sdk");
-var eventbridge = new AWS.EventBridge({apiVersion: '2015-10-07'})
+
+
+const { EventBridge } = require("@aws-sdk/client-eventbridge");
+
+var eventbridge = new EventBridge({})
 
 exports.handler = async (event) => {    
     // Get drinks
@@ -41,7 +44,7 @@ exports.handler = async (event) => {
         };
 
         try {
-            const response = await eventbridge.putEvents(params).promise()
+            const response = await eventbridge.putEvents(params)
             console.log(response)
         } catch (e) {
             console.log(e)

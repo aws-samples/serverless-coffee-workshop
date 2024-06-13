@@ -2,9 +2,11 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION })
-const eventbridge = new AWS.EventBridge()
+const { EventBridge } = require('@aws-sdk/client-eventbridge');
+
+const eventbridge = new EventBridge({
+  region: process.env.AWS_REGION,
+})
 
 const { nanoid } = require('nanoid')
 const { getItem, decrementToken } = require('./ddb')
@@ -86,7 +88,7 @@ exports.handler = async (event,context) => {
         Time: new Date
       }
     ]
-  }).promise()
+  })
   console.log('EventBridge putEvents:', response)
 
   // Return the code

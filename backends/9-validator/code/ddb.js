@@ -2,9 +2,11 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-const AWS = require('aws-sdk')
-AWS.config.update({region: process.env.AWS_REGION})
-const documentClient = new AWS.DynamoDB.DocumentClient()
+
+const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
+
+const documentClient = DynamoDBDocument.from(new DynamoDB())
 
 const getItem = async (id) => {
   const params = {
@@ -20,7 +22,7 @@ const getItem = async (id) => {
   console.log('getItem params: ', params)
 
   try {
-    const result = await documentClient.query(params).promise()
+    const result = await documentClient.query(params)
     console.log('getItem result: ', result)
     return result
   } catch (err) {
@@ -37,7 +39,7 @@ const saveItem = async (record) => {
   const result = await documentClient.put({
     TableName: process.env.TableName,
     Item
-  }).promise()
+  })
   console.log('saveItem: ', result)
 }
 
@@ -54,7 +56,7 @@ const decrementToken = async (record) => {
     ReturnValues:"UPDATED_NEW"
   }
   console.log(params)
-  const result = await documentClient.update(params).promise()
+  const result = await documentClient.update(params)
   console.log('decrementToken: ', result)
 }
 

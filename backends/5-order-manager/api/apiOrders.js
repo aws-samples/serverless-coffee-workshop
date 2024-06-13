@@ -2,11 +2,12 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-'use strict'
+'use strict';
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION })
-const documentClient = new AWS.DynamoDB.DocumentClient()
+const { DynamoDBDocument } = require('@aws-sdk/lib-dynamodb');
+const { DynamoDB } = require('@aws-sdk/client-dynamodb');
+
+const documentClient = DynamoDBDocument.from(new DynamoDB())
 
 // Returns all open orders
 const getOrders = async (state) => {
@@ -22,7 +23,7 @@ const getOrders = async (state) => {
     ProjectionExpression: "PK, SK, ORDERSTATE, robot, drink, TS, userId"
   }
 
-  const result = await documentClient.query(params).promise()
+  const result = await documentClient.query(params)
   console.log('openOrders: ', result)
   return result
 }

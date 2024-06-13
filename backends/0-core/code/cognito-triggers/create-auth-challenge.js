@@ -5,8 +5,8 @@
 "use strict"
 
 const crypto_secure_random_digit = require("crypto-secure-random-digit")
-const AWS = require("aws-sdk")
-const sns = new AWS.SNS()
+const { SNS } = require("@aws-sdk/client-sns");
+const sns = new SNS()
 
 const TEXT_MSG = "[Serverlesspresso] Your registration code is: "
 
@@ -46,6 +46,6 @@ async function sendSMSviaSNS(phoneNumber, passCode) {
     Message: `${TEXT_MSG} ${passCode}`,
     PhoneNumber: phoneNumber,
   }
-  const result = await sns.publish(params).promise()
+  const result = await sns.publish(params)
   console.log("SNS result: ", result)
 }

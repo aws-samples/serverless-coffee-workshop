@@ -1,6 +1,8 @@
-const AWS = require('aws-sdk')
-AWS.config.update({region: process.env.AWS_REGION})
-const cloudWatch = new AWS.CloudWatch({apiVersion: '2010-08-01'})
+const { CloudWatch } = require('@aws-sdk/client-cloudwatch');
+
+const cloudWatch = new CloudWatch({
+  region: process.env.AWS_REGION
+})
 
 exports.handler = async (event) => {
   console.log(JSON.stringify(event, null, 2))
@@ -38,6 +40,6 @@ exports.handler = async (event) => {
         'Unit': 'Count',
         'Value': 1
       })
-    console.log(await cloudWatch.putMetricData(params).promise())
+    console.log(await cloudWatch.putMetricData(params))
   }
 }

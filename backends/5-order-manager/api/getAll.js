@@ -2,12 +2,12 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-'use strict'
+'use strict';
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION })
+const { DynamoDBDocument } = require('@aws-sdk/lib-dynamodb');
+const { DynamoDB } = require('@aws-sdk/client-dynamodb');
 
-const documentClient = new AWS.DynamoDB.DocumentClient()
+const documentClient = DynamoDBDocument.from(new DynamoDB())
 const MAX_ITEMS = 100
 
 const isAdmin = (requestContext) => {
@@ -33,7 +33,7 @@ const getOrders = async (filters) => {
     ProjectionExpression: "PK, SK, orderNumber, robot, drinkOrder, TS, userId, baristaUserId"
   }
 
-  const result = await documentClient.query(params).promise()
+  const result = await documentClient.query(params)
   console.log('getOrders: ', result)
   return result.Items
 }
