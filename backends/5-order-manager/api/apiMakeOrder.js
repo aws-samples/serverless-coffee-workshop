@@ -2,13 +2,16 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-'use strict'
+'use strict';
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION })
+const { DynamoDBDocument } = require('@aws-sdk/lib-dynamodb');
+const { DynamoDB } = require('@aws-sdk/client-dynamodb');
+const { EventBridge } = require('@aws-sdk/client-eventbridge');
 
-const documentClient = new AWS.DynamoDB.DocumentClient()
-const eventbridge = new AWS.EventBridge()
+const documentClient = DynamoDBDocument.from(new DynamoDB())
+const eventbridge = new EventBridge({
+  region: process.env.AWS_REGION,
+})
 
 const isAdmin = (requestContext) => {
   try {
@@ -37,7 +40,7 @@ const updateDDB = async (record) => {
   }
 
   console.log('updateDDB: ', params)
-  const result = await documentClient.update(params).promise()
+  const result = await documentClient.update(params)
   console.log('Result: ', JSON.stringify(result,null, 2))
   return result.Attributes
 }
@@ -57,7 +60,7 @@ const publishEvent = async (record) => {
   }
 
   console.log('publishEvent: ', params)
-  const response = await eventbridge.putEvents(params).promise()
+  const response = await eventbridge.putEvents(params)
   console.log('EventBridge putEvents:', response)
 }
 

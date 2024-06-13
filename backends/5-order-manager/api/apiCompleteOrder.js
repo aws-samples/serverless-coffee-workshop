@@ -2,14 +2,26 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-'use strict'
-
+'use strict';
 const AWS = require('aws-sdk')
+
+const { DynamoDBDocument } = require('@aws-sdk/lib-dynamodb');
+const { DynamoDB } = require('@aws-sdk/client-dynamodb');
+const { EventBridge } = require('@aws-sdk/client-eventbridge');
+const { SFN } = require('@aws-sdk/client-sfn');
+
+// JS SDK v3 does not support global configuration.
+// Codemod has attempted to pass values to each service client in this file.
+// You may need to update clients outside of this file, if they use global config.
 AWS.config.update({ region: process.env.AWS_REGION })
 
-const documentClient = new AWS.DynamoDB.DocumentClient()
-const eventbridge = new AWS.EventBridge()
-const stepFunctions = new AWS.StepFunctions()
+const documentClient = DynamoDBDocument.from(new DynamoDB())
+const eventbridge = new EventBridge({
+  region: process.env.AWS_REGION,
+})
+const stepFunctions = new SFN({
+  region: process.env.AWS_REGION,
+})
 
 const headers = {
   'Content-Type': 'application/json',
@@ -45,7 +57,7 @@ const updateDDB = async (record) => {
   }
 
   console.log('updateDDB: ', params)
-  const result = await documentClient.update(params).promise()
+  const result = await documentClient.update(params)
   console.log('Result: ', JSON.stringify(result,null, 2))
 
   return {
@@ -66,7 +78,7 @@ const completeWorkflow = async (record) => {
 
   // console.log ({ sfnParams })
   try {
-    const sfnResult = await stepFunctions.sendTaskSuccess(sfnParams).promise()
+    const sfnResult = await stepFunctions.sendTaskSuccess(sfnParams)
     console.log({ sfnResult })
   } catch (err) {
     console.error('completeWorkflow error: ', err)
@@ -92,7 +104,7 @@ const publishEvent = async (record) => {
   }
 
   console.log('publishEvent: ', params)
-  const response = await eventbridge.putEvents(params).promise()
+  const response = await eventbridge.putEvents(params)
   console.log('EventBridge putEvents:', response)
 }
 

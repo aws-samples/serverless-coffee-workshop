@@ -2,11 +2,12 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-'use strict'
+'use strict';
+const { EventBridge } = require('@aws-sdk/client-eventbridge');
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION })
-const eventbridge = new AWS.EventBridge()
+const eventbridge = new EventBridge({
+  region: process.env.AWS_REGION
+})
 
 const { nanoid } = require('nanoid')
 const axios = require('axios')
@@ -47,7 +48,7 @@ exports.handler = async (event) => {
     })
   })
 
-  const response = await eventbridge.putEvents(params).promise()
+  const response = await eventbridge.putEvents(params)
   console.log('EventBridge putEvents:', response)
 
   // Step 2 - Wait

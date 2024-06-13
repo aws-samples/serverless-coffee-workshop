@@ -2,9 +2,10 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION })
-const documentClient = new AWS.DynamoDB.DocumentClient()
+const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
+
+const documentClient = DynamoDBDocument.from(new DynamoDB())
 
 // Increments the order ID count in the DynamoDB table
 const incrementCount = async (record) => {
@@ -19,7 +20,7 @@ const incrementCount = async (record) => {
     },
     ReturnValues:"UPDATED_NEW"
   }
-  const result = await documentClient.update(params).promise()
+  const result = await documentClient.update(params)
   console.log('incrementCount: ', result.Attributes.IDvalue)
   return result.Attributes.IDvalue
 }

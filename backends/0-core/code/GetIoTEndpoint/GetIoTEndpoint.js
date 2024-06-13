@@ -1,8 +1,7 @@
 /*! Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *  SPDX-License-Identifier: MIT-0
  */
-
-const aws = require("aws-sdk")
+const { IoT } = require("@aws-sdk/client-iot");
 
 exports.handler = function (event, context) {
   console.log("REQUEST RECEIVED:\n" + JSON.stringify(event))
@@ -13,7 +12,7 @@ exports.handler = function (event, context) {
     return
   }
 
-  const iot = new aws.Iot()
+  const iot = new IoT()
   iot.describeEndpoint({ endpointType: "iot:Data-ATS" }, (err, data) => {
     let responseData, responseStatus
     if (err) {

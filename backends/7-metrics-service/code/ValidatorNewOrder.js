@@ -2,9 +2,10 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-const AWS = require('aws-sdk')
-AWS.config.update({region: process.env.AWS_REGION})
-const cloudWatch = new AWS.CloudWatch({apiVersion: '2010-08-01'})
+const { CloudWatch } = require('@aws-sdk/client-cloudwatch');
+const cloudWatch = new CloudWatch({
+  region: process.env.AWS_REGION
+})
 
 exports.handler = async (event) => {
   console.log(JSON.stringify(event, null, 2))
@@ -27,5 +28,5 @@ exports.handler = async (event) => {
     Namespace: `${process.env.AppName}-dev`
   }
   // Send to CloudWatch
-  console.log(await cloudWatch.putMetricData(params).promise())
+  console.log(await cloudWatch.putMetricData(params))
 }

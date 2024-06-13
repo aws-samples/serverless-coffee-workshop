@@ -2,13 +2,16 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-'use strict'
+'use strict';
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION })
+const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
+const { SFN } = require("@aws-sdk/client-sfn");
 
-const stepFunctions = new AWS.StepFunctions()
-const documentClient = new AWS.DynamoDB.DocumentClient()
+const stepFunctions = new SFN({
+  region: process.env.AWS_REGION,
+})
+const documentClient = DynamoDBDocument.from(new DynamoDB())
 const axios = require('axios')
 
 // Cache menu contents between invocations
@@ -36,7 +39,7 @@ const updateDrinkOrder = async (record) => {
     ReturnValues: "ALL_NEW"
   }
   console.log('updateDrinkOrder: ', params)
-  const result = await documentClient.update(params).promise()
+  const result = await documentClient.update(params)
   console.log(result)
   return result
 }
@@ -48,7 +51,7 @@ const sendTaskSuccess = async(orderId, TaskToken) => {
     output: JSON.stringify({ orderId })
   }
   console.log ('sendTaskSuccess: ', { sfnParams })
-  const sfnResult = await stepFunctions.sendTaskSuccess(sfnParams).promise()
+  const sfnResult = await stepFunctions.sendTaskSuccess(sfnParams)
   console.log('sendTaskSuccess: ', { sfnResult })
   return sfnResult
 }

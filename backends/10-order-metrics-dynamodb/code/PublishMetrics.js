@@ -1,5 +1,9 @@
-const dynamodb = require('aws-sdk/clients/dynamodb');
-const docClient = new dynamodb.DocumentClient();
+const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
+const {
+    DynamoDB: dynamodb,
+} = require("@aws-sdk/client-dynamodb");
+
+const docClient = DynamoDBDocument.from(new dynamodb());
 exports.handler = async (event) => {
     console.log(event)
     const date = new Date().toISOString().slice(0, 10);
@@ -48,7 +52,7 @@ exports.handler = async (event) => {
             ]
         }
     try {
-        await docClient.transactWrite(transactParams).promise()
+        await docClient.transactWrite(transactParams)
     }
     catch(e) {
         console.log(e)
