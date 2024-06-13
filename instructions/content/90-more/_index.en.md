@@ -18,4 +18,4 @@ This workshop is just the beginning. Learn more about what you can build with se
 
 ### Need help? ###
 
-This workshop is built and managed by the AWS Serverless Developer Advocate team. [Follow us on Twitter](https://twitter.com/i/lists/1291800104777551872).
+Raise an issue on [GitHub](https://github.com/aws-samples/serverless-coffee-workshop)
