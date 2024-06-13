@@ -3,17 +3,11 @@
  */
 
 'use strict';
-const AWS = require('aws-sdk')
 
 const { DynamoDBDocument } = require('@aws-sdk/lib-dynamodb');
 const { DynamoDB } = require('@aws-sdk/client-dynamodb');
 const { EventBridge } = require('@aws-sdk/client-eventbridge');
 const { SFN } = require('@aws-sdk/client-sfn');
-
-// JS SDK v3 does not support global configuration.
-// Codemod has attempted to pass values to each service client in this file.
-// You may need to update clients outside of this file, if they use global config.
-AWS.config.update({ region: process.env.AWS_REGION })
 
 const documentClient = DynamoDBDocument.from(new DynamoDB())
 const eventbridge = new EventBridge({
