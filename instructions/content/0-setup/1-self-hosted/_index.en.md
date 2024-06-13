@@ -3,10 +3,6 @@ title = "Self hosted"
 weight = 3
 +++
 
-{{% notice warning %}}
-Only complete this section if you would like to run this workshop **in your own account**. If you are participating in an AWS Event using the Event Engine, skip this page and proceed to the next chapter.
-{{% /notice %}}
-
 ### 1. Launch the AWS CloudFormation template
 
 This workshop can be run inside your own AWS accounts. To enable you to follow the workshop, we need to set up and configure a number of AWS services. We have made provisioning these services as simple as possible.

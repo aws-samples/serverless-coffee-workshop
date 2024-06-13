@@ -3,7 +3,7 @@ title = "Overview"
 weight = 1
 +++
 
-The Serverlesspresso application consists of three frontends and a backend application. The frontends are already built and deployed in an AWS-owned account. Some of backend resources will be pre-deployed into your workshop account during the [AWS Hosted](/0-setup/1-aws-hosted.html) or [Self Hosted](/0-setup/1-self-hosted.html) sections.
+The Serverlesspresso application consists of three frontends and a backend application. The frontends are already built and deployed in an AWS-owned account. Some of backend resources will be pre-deployed into your workshop account during the [Setup](/0-setup/1-self-hosted.html) sections.
 
 [![See Serverlesspresso](/images/se-setup-overview4.png)](https://youtu.be/M6lPZCRCsyA)
 
@@ -29,12 +29,6 @@ Each of the following sections provides an implementation overview and detailed,
 {{% notice note %}}
 Please ensure that you follow the instructions in the order listed.
 {{% /notice %}}
-
-### Recap
-
-* You followed ONE of:
-* AWS Hosted -  You logged into a temporary AWS account, with some backend resources pre-deployed.
-* Self Hosted - You deployed the core resources template into your own AWS account.
 
 ### Next steps
 
