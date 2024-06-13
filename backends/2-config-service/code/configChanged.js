@@ -9,9 +9,7 @@ const { DynamoDB } = require('@aws-sdk/client-dynamodb');
 const { EventBridge } = require('@aws-sdk/client-eventbridge');
 
 const documentClient = DynamoDBDocument.from(new DynamoDB())
-const eventbridge = new EventBridge({
-  region: process.env.AWS_REGION
-})
+const eventbridge = new EventBridge()
 
 // Returns application config
 exports.handler = async (event) => {

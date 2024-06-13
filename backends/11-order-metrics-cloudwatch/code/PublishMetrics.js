@@ -1,8 +1,6 @@
 const { CloudWatch } = require('@aws-sdk/client-cloudwatch');
 
-const cloudWatch = new CloudWatch({
-  region: process.env.AWS_REGION
-})
+const cloudWatch = new CloudWatch()
 
 exports.handler = async (event) => {
   console.log(JSON.stringify(event, null, 2))

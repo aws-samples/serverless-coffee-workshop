@@ -10,12 +10,8 @@ const { EventBridge } = require('@aws-sdk/client-eventbridge');
 const { SFN } = require('@aws-sdk/client-sfn');
 
 const documentClient = DynamoDBDocument.from(new DynamoDB())
-const eventbridge = new EventBridge({
-  region: process.env.AWS_REGION,
-})
-const stepFunctions = new SFN({
-  region: process.env.AWS_REGION,
-})
+const eventbridge = new EventBridge()
+const stepFunctions = new SFN()
 
 const headers = {
   'Content-Type': 'application/json',
