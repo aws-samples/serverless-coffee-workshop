@@ -8,9 +8,7 @@ const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
 const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 const { SFN } = require("@aws-sdk/client-sfn");
 
-const stepFunctions = new SFN({
-  region: process.env.AWS_REGION,
-})
+const stepFunctions = new SFN()
 const documentClient = DynamoDBDocument.from(new DynamoDB())
 
 // Update order

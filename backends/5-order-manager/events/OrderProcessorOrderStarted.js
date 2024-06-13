@@ -9,9 +9,7 @@ const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 const { SFN } = require("@aws-sdk/client-sfn");
 
 const documentClient = DynamoDBDocument.from(new DynamoDB())
-const stepFunctions = new SFN({
-  region: process.env.AWS_REGION,
-})
+const stepFunctions = new SFN()
 
 // Returns details of a Place ID where the app has user-generated content.
 exports.handler = async (event) => {

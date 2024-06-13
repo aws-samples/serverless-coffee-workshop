@@ -5,9 +5,7 @@
 'use strict';
 const { EventBridge } = require('@aws-sdk/client-eventbridge');
 
-const eventbridge = new EventBridge({
-  region: process.env.AWS_REGION
-})
+const eventbridge = new EventBridge()
 
 const { nanoid } = require('nanoid')
 const axios = require('axios')

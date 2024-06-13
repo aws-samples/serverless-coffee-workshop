@@ -4,9 +4,7 @@
 
 const { SFN } = require('@aws-sdk/client-sfn');
 
-const stepFunctions = new SFN({
-  region: process.env.AWS_REGION
-})
+const stepFunctions = new SFN()
 
 // Gets current number of running executions in state machine
 const getQueueSize = async (record) => {
