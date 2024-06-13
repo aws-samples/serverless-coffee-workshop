@@ -1,5 +1,3 @@
-const AWS = require('aws-sdk')
-
 const { CloudWatch } = require('@aws-sdk/client-cloudwatch');
 
 const cloudWatch = new CloudWatch({

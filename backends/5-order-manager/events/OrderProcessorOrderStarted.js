@@ -2,13 +2,16 @@
  *  SPDX-License-Identifier: MIT-0
  */
 
-'use strict'
+'use strict';
 
-const AWS = require('aws-sdk')
-AWS.config.update({ region: process.env.AWS_REGION })
+const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
+const { SFN } = require("@aws-sdk/client-sfn");
 
-const documentClient = new AWS.DynamoDB.DocumentClient()
-const stepFunctions = new AWS.StepFunctions()
+const documentClient = DynamoDBDocument.from(new DynamoDB())
+const stepFunctions = new SFN({
+  region: process.env.AWS_REGION,
+})
 
 // Returns details of a Place ID where the app has user-generated content.
 exports.handler = async (event) => {
@@ -34,7 +37,7 @@ exports.handler = async (event) => {
   }
 
   console.log(params)
-  const result = await documentClient.update(params).promise()
+  const result = await documentClient.update(params)
   console.log(result)
 
   // Update Step Functions workflow
@@ -43,6 +46,6 @@ exports.handler = async (event) => {
     output: JSON.stringify({'orderId': event.detail.orderId})
   }
   console.log ({ sfnParams })
-  const sfnResult = await stepFunctions.sendTaskSuccess(sfnParams).promise()
+  const sfnResult = await stepFunctions.sendTaskSuccess(sfnParams)
   console.log({ sfnResult })
 }
