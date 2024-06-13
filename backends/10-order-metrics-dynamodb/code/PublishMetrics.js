@@ -1,9 +1,7 @@
 const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
-const {
-    DynamoDB: dynamodb,
-} = require("@aws-sdk/client-dynamodb");
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 
-const docClient = DynamoDBDocument.from(new dynamodb());
+const docClient = DynamoDBDocument.from(new DynamoDB());
 exports.handler = async (event) => {
     console.log(event)
     const date = new Date().toISOString().slice(0, 10);
