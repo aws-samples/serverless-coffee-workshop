@@ -71,6 +71,7 @@ The workflow must branch logic depending on the value returned by the ListExecut
 - For *Not*, **leave blank** in the dropdown.
 - For *Variable*, enter `$.isCapacityAvailable.Executions[20]`.
 - For *Operator*, select **is present**.
+- For *Value*, select **true**.
 - Choose **Save conditions**.
 
 **Double-check that the NOT dropdown is blank before continuing**
